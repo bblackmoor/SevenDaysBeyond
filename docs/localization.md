@@ -28,7 +28,7 @@ Automated tests round-trip the production binary codec, render the same packet i
 
 Before marking the release tested in game:
 
-1. Update the server and every client to 0.6.0 together. A 0.4.1 client companion cannot handle the new packet; keep the server on 0.5.1 until clients are ready for the coordinated update.
+1. Update the server and every client to 0.6.0 together. A 0.4.1 client companion cannot handle the new packet. ANNWN is updated; install the matching 0.6.0 client package before joining.
 2. With an English client and a Spanish client connected to the same server, run `/sdb status`, `/sdb time`, `/sdb map`, and `/sdb quests`. Confirm each receives its own language regardless of server language.
 3. Grant `givequest sdb_test_fieldwork` from F1 and check the native quest name and description. Start a travel test, cross and return; verify translated test states and persistent partial objective progress.
 4. Check the 50 m/10 m warnings, closed-edge protection, approach cancellation and arrival-ground-change cancellation. Confirm debug modes, inventory and the shared clock still survive a crossing.

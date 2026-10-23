@@ -1,4 +1,12 @@
-# Client testing tools (0.4.1)
+# Client testing tools
+
+## Current installation: 0.6.0
+
+ANNWN now runs the shared 0.6.0 package. Download [SevenDaysBeyond-0.6.0.zip](../downloads/SevenDaysBeyond-0.6.0.zip) from GitHub using the download button on the file page. Close the game, extract the ZIP, and copy its complete `SevenDaysBeyond` folder into your game’s `Mods` directory, replacing the previous Beyond client companion. Keep the existing `LITW_MultiWorld` and `0_TFP_Harmony` folders and continue starting without EAC. Do not copy `src/SevenDaysBeyond` from the source repository: it contains uncompiled source, not the installable DLL.
+
+The ZIP includes the DLL, ModInfo.xml, and Config containing quests.xml and Localization.csv. Install that entire folder so the localization and quest files are included. The debug-state preservation described below remains included. Use `/sdb status`, `/sdb map` and `/sdb quests` after joining; see [localization testing](localization.md#verification).
+
+The sections below document the earlier 0.4.1 fix and its validation history.
 
 ## Debug-state transfer fix
 

@@ -7,4 +7,6 @@
 - Localize border/travel messages, grid and world reports, shared time, quest-book diagnostics and test-quest text. Preserve existing saves and the pinned upstream dependency.
 - Validate translation references and placeholders during builds; add production codec, fallback and translator-error tests and contribution instructions.
 
-Built against the pinned game assemblies and checked with the automated suite. In-game multilingual, packet-mapping and transfer regression checks remain pending. ANNWN remains on 0.5.1 until a coordinated client/server update.
+Built against the pinned game assemblies and checked with the automated suite. Deployed and restarted on ANNWN: native localization, all four worlds, native quest serialization, safe landing probes, suspension and shared-clock self-tests passed startup checks. In-game multilingual, client packet-mapping and transfer regression checks remain pending. Download the matching shared ZIP from `downloads/` before joining.
+
+Deployment evidence and backup details: [ANNWN 0.6.0](docs/deployment-0.6.0.md).

@@ -21,7 +21,7 @@ Companion 0.5.1 expands to a [2 × 2 grid and character quest book](docs/grid-qu
 
 See [development setup](docs/development.md) for dependency acquisition, build commands, and the first in-game checks, and [phase 1 findings](docs/phase-1.md) for integration points and remaining work.
 
-Version 0.6.0 adds a [shared client/server package and native localization](docs/localization.md): 56 Beyond text keys with English and initial Spanish/Latin American Spanish translations, per-player language selection, English fallback and build-time translation checks. Update clients and server together; ANNWN remains on 0.5.1 pending that coordinated update. The 0.6.0 build and automated checks pass; in-game multilingual and packet-mapping checks are pending. See the [changelog](CHANGELOG.md).
+Version 0.6.0 adds a [shared client/server package and native localization](docs/localization.md): 56 Beyond text keys with English and initial Spanish/Latin American Spanish translations, per-player language selection, English fallback and build-time translation checks. ANNWN now runs 0.6.0. Install the matching [client/server ZIP](downloads/SevenDaysBeyond-0.6.0.zip) before connecting. The build, automated checks and server startup checks pass; in-game multilingual, client packet-mapping and transfer regression checks are pending. See the [changelog](CHANGELOG.md).
 
 The native server baseline passed a client connection/disconnect test and is preserved. ANNWN now runs the isolated [West/East MultiWorld test](docs/multiworld-test.md); see [the original server setup](docs/annwn-server.md) for installation details.
 
