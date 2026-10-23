@@ -1,6 +1,6 @@
 {
   "game": "7 Days to Die V3.3.0 (b18), pinned ANNWN SDK",
-  "sandboxCode": "AAAGABGAMGANBASGAWBAXAAYBAZBBBDBFIBNABOABSABUABWACCGCFBCXADMJDWFEABEKBERFESFETGEXAFCCFDEFEBFFHFGDFLEFODGABGHH",
+  "sandboxCode": "AAAGABGAMGANBASGAWBAXAAYBAZBBBDBFIBNABOABSBBUBBWACCGCFBCXADMJDWFEABEKAERFESFETGEXAFCAFDEFEBFFHFGDFLEFODGABGHH",
   "options": {
     "RangedDamage": 0.85,
     "MeleeDamage": 0.85,
@@ -12,8 +12,8 @@
     "DropOnDeath": 3,
     "StackSizeMultiplier": 2.0,
     "JarRefund": 0.5,
-    "BiomeDayZombieRespawn": 0,
-    "BiomeDayEnemyDensity": -1,
+    "BiomeDayZombieRespawn": 1,
+    "BiomeDayEnemyDensity": 0,
     "BiomeNightZombieRespawn": 1,
     "EntityDamage": 1.25,
     "ShowHealthBars": true,
@@ -26,9 +26,9 @@
     "LootBagChance": 1.5,
     "CraftingMaxTier": 5,
     "SmeltingType": true,
-    "MaxDegradationAmount": 0.05,
+    "MaxDegradationAmount": 0,
     "TraderHours": 0,
-    "TraderProtection": 2,
+    "TraderProtection": 0,
     "TraderMaxTier": 3,
     "TraderItemAbundance": 0.5,
     "TraderResetInterval": 4,
@@ -41,9 +41,10 @@
   },
   "notes": {
     "TraderHours": "0: native XML daytime schedule, 04:05-21:50",
-    "TraderProtection": "2: Not Claimable",
-    "BiomeDayEnemyDensity": "-1: None; native Day Enemy Respawn has no Off value",
-    "BiomeDayZombieRespawn": "0: Default, made inactive for daytime biome spawning by density None",
-    "BiomeNightZombieRespawn": "1: Very Slow"
+    "TraderProtection": "0: Yes; trader compound damage protection enabled",
+    "BiomeDayEnemyDensity": "0: Default biome population",
+    "BiomeDayZombieRespawn": "1: Very Slow",
+    "BiomeNightZombieRespawn": "1: Very Slow",
+    "MaxDegradationAmount": "0: no maximum-durability loss from repairs"
   }
 }
