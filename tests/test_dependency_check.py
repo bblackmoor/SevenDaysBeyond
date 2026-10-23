@@ -11,13 +11,16 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 DOTNET = os.environ.get("DOTNET", "dotnet")
 CHECKER = ROOT / "artifacts/tools/DependencyCheck.dll"
-UPSTREAM = ROOT / "resources/multiworld/original/LITW_MultiWorld/LITWMultiWorldProbe.dll"
+UPSTREAM = Path(os.environ.get("MULTIWORLD_DLL") or
+                ROOT / "local-dependencies/multiworld/LITWMultiWorldProbe.dll").expanduser()
 
 
+@unittest.skipUnless(UPSTREAM.is_file(), "External MultiWorld fixture absent; set MULTIWORLD_DLL")
 class DependencyCheckTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        subprocess.run([sys.executable, str(ROOT / "tools/dev.py"), "check", "--reference-only", "--dotnet", DOTNET], check=True)
+        subprocess.run([sys.executable, str(ROOT / "tools/dev.py"), "check", "--reference-only", "--dotnet", DOTNET,
+                        "--upstream", str(UPSTREAM.resolve())], check=True)
 
     def check(self, extra=(), upstream=UPSTREAM):
         with tempfile.TemporaryDirectory() as folder:
@@ -61,6 +64,8 @@ class DependencyCheckTests(unittest.TestCase):
         self.assertEqual(result.returncode, 1)
         self.assertIsNone(report)
 
+
+class DependencyLockTests(unittest.TestCase):
     def test_dependency_lock_rejects_changed_files(self):
         spec = importlib.util.spec_from_file_location("fetch_dependencies", ROOT / "tools/fetch-dependencies.py")
         module = importlib.util.module_from_spec(spec)

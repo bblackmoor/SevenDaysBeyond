@@ -31,7 +31,7 @@ Current gameplay settings are documented in [ANNWN sandbox settings](docs/annwn-
 
 ## Independent Multiworld replacement
 
-[Multiworld replacement specification](docs/multiworld-replacement/README.md) documents the inspected 0.6.2 architecture, transfer/network/storage contracts, current companion dependencies, implementation stages and acceptance tests. Its evidence inventory covers 119 Harmony patch declarations and 176 top-level static methods. These documents live outside the third-party reference directory so they remain available when that material is removed. This is a documentation milestone; the current runtime still requires Multiworld.
+[Multiworld replacement specification](docs/multiworld-replacement/README.md) documents the inspected 0.6.2 architecture, transfer/network/storage contracts, current companion dependencies, implementation stages and acceptance tests. Its evidence inventory covers 119 Harmony patch declarations and 176 top-level static methods. The bundled third-party archive, DLL, decompiled source and IL have now been removed from the current branch. These notes remain available independently. The current companion still requires a separately installed Multiworld runtime; an independent replacement has not yet been implemented. See [removal notes](docs/multiworld-replacement/removal-notes.md).
 
 ## Feature backlog
 
@@ -48,12 +48,10 @@ The following features are intended future work; detailed design and implementat
 - `tools/` — dependency acquisition, metadata inspection, collection, and build commands.
 - `config/dependencies.lock.json` — Steam manifest and dependency checksums.
 - `docs/` — development setup, integration findings, and verification status.
-- `resources/multiworld/original/` — supplied archive and unchanged extracted mod files.
-- `resources/multiworld/decompiled/` — reconstructed C# for inspection, not the author's original source.
-- `resources/multiworld/analysis/` — implementation findings and dependency information.
-- `resources/multiworld/README.md` — provenance, decompilation procedure, and limitations.
+- `docs/multiworld-replacement/` — independent replacement specification, contracts, migration plan and historical evidence inventory.
+- `local-dependencies/` — ignored, separately supplied build dependencies; no upstream implementation is tracked.
 
-See [the MultiWorld research notes](resources/multiworld/README.md) before attempting a build. Decompiled code is reference material; inclusion does not grant a new license to the upstream mod. Game and Harmony dependencies are not bundled.
+See [development setup](docs/development.md) for supplying the external DLL and game/Harmony dependencies. The repository no longer bundles Multiworld implementation material.
 
 -----
 

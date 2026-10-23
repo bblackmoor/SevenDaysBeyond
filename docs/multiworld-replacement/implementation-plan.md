@@ -149,7 +149,7 @@ Those are tests of the upstream-based prototype. They do not prove the independe
 
 ## Repository removal checklist
 
-Documenting the mod and removing stored third-party material are separate from removing the live runtime dependency. The user requested analysis in preparation for removal; this change does not delete files, rewrite history, deploy code or restart ANNWN.
+Documenting the mod and removing stored third-party material are separate from removing the live runtime dependency. The bundled reference directory has now been removed; see [removal notes](removal-notes.md). No history rewrite, runtime replacement, deployment or ANNWN restart was performed.
 
 When removing stored material, retain this directory, its provenance hashes and our own project code; remove the archive, extracted DLL, reconstructed code, IL, decompilation script/project and obsolete research outputs from `resources/multiworld/` as appropriate. Update README/layout links and any tooling that assumes those paths. A normal deletion affects the branch tip; older commits still contain the material. History cleanup, if required, is a separate coordinated operation and is not performed here.
 

@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Remove bundled LITW MultiWorld archive, DLL, decompiled C#, IL and reference scripts from the current branch after preserving the replacement analysis and final dependency notes.
+- Accept the current companion’s external DLL through `--upstream`, `MULTIWORLD_DLL`, or ignored `local-dependencies/multiworld/`; explicitly skip upstream metadata integration tests when that fixture is absent.
+- Keep independent replacement documentation and existing companion/gameplay code. The deployed runtime and Git history are unchanged.
+
 ## 0.6.0
 
 - Provide one client/server Beyond package with native game localization. Include English and initial Spanish/Latin American Spanish translations for all 56 Beyond text keys, with English fallback for other languages.

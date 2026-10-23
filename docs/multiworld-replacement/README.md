@@ -2,7 +2,7 @@
 
 Analysis date: 2026-10-23. Inspected repository snapshot: `61b0e10cfd935d96f0f227d5591acb697962523b`.
 
-This documentation describes LITW MultiWorld 0.6.2 and the responsibilities an independently written replacement must assume. It preserves behavioral findings, game integration surfaces, data contracts, failure cases, and an implementation/verification plan. It contains no reproduced implementation bodies, decompiler project, IL, binary, or archive. Keep this directory when removing `resources/multiworld/`.
+This documentation describes LITW MultiWorld 0.6.2 and the responsibilities an independently written replacement must assume. It preserves behavioral findings, game integration surfaces, data contracts, failure cases, and an implementation/verification plan. It contains no reproduced implementation bodies, decompiler project, IL, binary, or archive. The former `resources/multiworld/` directory has now been removed from the current branch. See [removal notes](removal-notes.md).
 
 Read these documents in order:
 

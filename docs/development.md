@@ -6,7 +6,7 @@ The project provides a dependency inspector, runtime compatibility checks, and a
 
 - Python 3.11 or later.
 - .NET SDK 8, including its reference pack. A runtime alone is insufficient.
-- LITW MultiWorld 0.6.2, preserved under `resources/multiworld/original/`.
+- A separately obtained LITW MultiWorld 0.6.2 DLL for the current upstream-based companion. Third-party binaries, archives and reconstructed code are no longer stored in this repository.
 
 The Python entry point invokes the SDK's Roslyn compiler directly. It compiles the development inspector against .NET 8, and the game mod against the actual game framework assemblies. It does not substitute .NET 8's framework for the game's Mono framework. This also works in environments where MSBuild's process inspection is unavailable. The inspector has no NuGet dependencies; its `.csproj` is supplied for conventional SDK/IDE builds as well.
 
@@ -42,6 +42,8 @@ Supply `--harmony DIRECTORY` if Harmony is installed somewhere other than `Mods/
 
 ## Inspect and build
 
+Place your separately obtained `LITWMultiWorldProbe.dll` at the ignored path `local-dependencies/multiworld/LITWMultiWorldProbe.dll`, set `MULTIWORLD_DLL` to its path, or pass `--upstream /path/to/LITWMultiWorldProbe.dll` to each check/build command. `MULTIWORLD_DLL` also selects the fixture for metadata integration tests. The DLL must match the pinned hash; this cleanup does not remove the companion’s runtime dependency. Nothing automatically downloads or restores the removed material.
+
 ```sh
 python tools/dev.py check --reference-only
 python tools/dev.py build --managed local-dependencies/server/7DaysToDieServer_Data/Managed --harmony local-dependencies/server/Mods/0_TFP_Harmony
@@ -59,7 +61,7 @@ python -m unittest discover -s tests -v
 
 The [0.4.1 client testing companion](client-testing.md) can also be installed without `BoundaryTest.xml` to preserve debug settings during a retained-session map transfer. Its hooks install once per client process, only after the unchanged upstream binary passes verification.
 
-The tests exercise actual metadata, all hook signatures, missing dependencies, wrong and modified managed binaries, non-managed input, and checksum rejection. They do not mock the game API or claim to simulate the game.
+When the external fixture is available, the metadata integration tests exercise all hook signatures, missing dependencies, wrong and modified managed binaries, and non-managed input. Those five integration tests are explicitly skipped when the fixture is absent; the independent dependency-lock checksum test still runs. Policy/calendar/quest/localization tests remain independent of the upstream DLL but require the documented .NET SDK for their compiled checks. They do not mock the game API or claim to simulate the game.
 
 ## First in-game verification
 
@@ -74,12 +76,6 @@ Use a separate test server and two disposable map saves with MultiWorld's normal
 
 The baseline in-game smoke test was run on ANNWN, not in this workspace. The selective dependency download does not contain a runnable dedicated server. A clean compile and metadata check establish build readiness, not runtime compatibility or reliable transfers.
 
-## Improved decompilation
+## Independent replacement research
 
-With ILSpy CLI 9.1.0.7988 installed, copy the resolved reference assemblies listed in `artifacts/dependency-report.json` into an ignored directory, then export into a fresh output directory:
-
-```sh
-ilspycmd --disable-updatecheck --referencepath local-dependencies/resolved --project --outputdir artifacts/multiworld-resolved resources/multiworld/original/LITW_MultiWorld/LITWMultiWorldProbe.dll
-```
-
-The phase 1 investigation performed this export successfully, removing the 464 unresolved-IL warning comments in the initial export. The regenerated C# is still reconstructed source. A trial full rebuild exposed decompiler artifacts, including an emitted compiler attribute and nullable `typeof` expressions, as well as additional framework facade references needed for that larger build. It is not a verified replacement DLL. The original archive, DLL, IL listing, and initial decompiled source remain unchanged.
+The archive, DLL, IL export, reconstructed C# project and associated reference-directory scripts have been removed from the current branch. [Replacement documentation](multiworld-replacement/README.md) preserves the behavioral specification, native integration surfaces, packet/storage contracts, evidence inventory and acceptance plan. [Removal notes](multiworld-replacement/removal-notes.md) record the final dependency facts and current external-fixture workflow. Earlier investigation results in phase documents are historical records, not instructions to retrieve deleted repository paths.

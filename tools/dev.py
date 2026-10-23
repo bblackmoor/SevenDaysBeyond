@@ -11,7 +11,8 @@ import sys
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-UPSTREAM = ROOT / "resources/multiworld/original/LITW_MultiWorld/LITWMultiWorldProbe.dll"
+UPSTREAM = Path(os.environ.get("MULTIWORLD_DLL") or
+                ROOT / "local-dependencies/multiworld/LITWMultiWorldProbe.dll").expanduser()
 
 
 def version_key(path):
@@ -91,6 +92,10 @@ def main():
         return 0
     if args.command == "build" and args.reference_only:
         parser.error("build cannot skip dependencies with --reference-only")
+    if not args.upstream.is_file():
+        raise ValueError("MultiWorld is an external dependency and is not bundled. "
+                         "Supply --upstream /path/to/LITWMultiWorldProbe.dll, set MULTIWORLD_DLL, "
+                         "or place your separately obtained DLL at " + str(UPSTREAM))
     run([sys.executable, ROOT / "tools/check-localization.py"])
     dotnet = shutil.which(args.dotnet)
     if not dotnet:

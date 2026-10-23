@@ -8,4 +8,5 @@
 local-dependencies/
 artifacts/
 **/__pycache__/
-# Preserve the original supplied reference binary.
+# Third-party Multiworld implementation material must remain untracked.
+resources/multiworld/
