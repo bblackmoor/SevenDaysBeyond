@@ -27,6 +27,8 @@ The native server baseline passed a client connection/disconnect test and is pre
 
 The starting reference is LITW MultiWorld 0.6.2, supplied as a compiled mod. Its existing configuration accepts 1–64 worlds, but it initializes and updates every configured world. It currently blocks transfers while riding a vehicle and restores destination-specific arrival positions rather than matching map edges.
 
+Current gameplay settings are documented in [ANNWN sandbox settings](docs/annwn-sandbox.md), with the versioned preset and native code under `config/`.
+
 ## Repository layout
 
 - `src/SevenDaysBeyond/` — compatibility checks and experimental two-world on-foot travel.
