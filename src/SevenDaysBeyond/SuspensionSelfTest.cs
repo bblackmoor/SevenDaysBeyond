@@ -18,6 +18,7 @@ namespace SevenDaysBeyond
         private static ulong[] clocks, ticks;
         private static long[] frames, physics;
         private static long pumps;
+        internal static bool Running { get { return enabled; } }
         internal static void Enable() { enabled=true; }
         internal static void Tick()
         {

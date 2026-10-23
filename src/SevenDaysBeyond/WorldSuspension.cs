@@ -25,6 +25,7 @@ namespace SevenDaysBeyond
         private static MethodInfo findOwner;
         private static volatile Dictionary<int, World> sceneWorlds = new Dictionary<int, World>();
         private static Harmony harmony;
+        internal static bool Enabled { get { return enabled; } }
         internal static long GlobalTaskPumps;
         private static float reportAt;
         private static MethodInfo active;
@@ -108,7 +109,7 @@ namespace SevenDaysBeyond
                     {
                         WaterSimulationNative water = MultiWorldBridge.Water(c);
                         if (!run) { s.PreviousWaterPause = water.IsPaused; water.SetPaused(true); }
-                        else water.SetPaused(s.PreviousWaterPause);
+                        else { water.SetPaused(s.PreviousWaterPause); SharedClock.WorldResumed(c); }
                         s.Sleeping = !run;
                         Log.Out("[SevenDaysBeyond] WORLD_"+(run?"RESUMED ":"SUSPENDED ")+MultiWorldBridge.Name(c)+" ticks="+MultiWorldBridge.Timer(c).ticks+" worldTime="+w.worldTime);
                     }

@@ -60,6 +60,7 @@ namespace SevenDaysBeyond
         internal static object Active() { return Method("ActiveContext").Invoke(null, null); }
         internal static object Source(object r) { return Field(r.GetType(), "Source", Instance).GetValue(r); }
         internal static object[] Requests() { return ((IDictionary)transfers.GetValue(null)).Values.Cast<object>().ToArray(); }
+        internal static string SavePath(object c) { return (string)Field(ContextType,"SavePath",Instance).GetValue(c); }
         internal static GameTimer Timer(object c) { return (GameTimer)Field(ContextType,"Timer",Instance).GetValue(c); }
         internal static WaterSimulationNative Water(object c) { return (WaterSimulationNative)Field(ContextType,"Water",Instance).GetValue(c); }
         internal static Scene Scene(object c) { return (Scene)Field(ContextType,"Scene",Instance).GetValue(c); }

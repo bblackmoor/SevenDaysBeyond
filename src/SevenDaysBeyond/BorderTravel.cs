@@ -66,6 +66,8 @@ namespace SevenDaysBeyond
                 ModEvents.ChatMessage.RegisterHandler(OnChat);
                 if (config.DocumentElement.GetAttribute("freezeEmptyWorlds") == "true")
                     WorldSuspension.Install(upstream, config.DocumentElement.GetAttribute("suspensionSelfTest") == "true");
+                if (config.DocumentElement.GetAttribute("sharedClock") == "true")
+                    SharedClock.Configure(config.DocumentElement.GetAttribute("clockSelfTest") == "true");
                 enabled = true;
                 Log.Out("[SevenDaysBeyond] BORDER_TRAVEL_ENABLED West/east <-> East/west; warning=700m; trigger=500m; arrival=600m; on-foot only; approachCommand=" + allowApproach);
             }
@@ -325,7 +327,7 @@ namespace SevenDaysBeyond
         private static ModEvents.EModEventResult OnChat(ref ModEvents.SChatMessageData data)
         {
             string message = (data.Message ?? "").Trim().ToLowerInvariant();
-            if (message != "/sdb status" && message != "/sdb approach") return (ModEvents.EModEventResult)0;
+            if (message != "/sdb status" && message != "/sdb approach" && message != "/sdb time") return (ModEvents.EModEventResult)0;
             ClientInfo c = data.ClientInfo;
             if (!enabled || failed || !MultiWorldBridge.Ready || c == null || !c.loginDone) return (ModEvents.EModEventResult)2;
             try
@@ -337,13 +339,15 @@ namespace SevenDaysBeyond
                     EntityPlayer p = Player(c, context);
                     if (p == null || p.IsDead()) return (ModEvents.EModEventResult)2;
                     MapBounds b = Bounds(context);
-                    if (message == "/sdb status")
+                    if (message == "/sdb time") SharedClock.Report(c);
+                    else if (message == "/sdb status")
                     {
                         float distance;
                         BorderEdge edge = BorderPolicy.Nearest(b, p.position.x, p.position.z, out distance);
                         Say(c, "World: " + MultiWorldBridge.Name(context) + "; nearest edge: " + edge + "; distance: " + distance.ToString("0", CultureInfo.InvariantCulture)
                             + " m. Crossing starts 500 m inside the edge; warnings start at 700 m.");
                         WorldSuspension.Report(c);
+                        SharedClock.Report(c);
                     }
                     else
                     {

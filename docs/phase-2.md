@@ -16,7 +16,7 @@ Companion 0.2.0 introduces the first server-only on-foot border prototype. It do
 - Reuse the existing fresh-checkpoint/token/epoch/cooldown/timeout/rollback protocol. The arrival override is bound to the exact upstream request object, player ID, and destination. Rollback and manual `/world` travel retain upstream saved-position behavior.
 - Arrival is written into destination player data before spawn, rather than teleporting across worlds after spawning. A 20-second companion cooldown prevents rapid repeat attempts.
 
-The companion monitors a postfix of the pinned `UpdateBothWorlds` method at most four times per second. It does not change the upstream scheduler, empty-world simulation, quests, or clocks. Runtime access to private upstream state is centralized in `MultiWorldBridge`; missing members or incompatible patches prevent activation. Unhandled monitoring errors disable further automatic starts and log `BORDER_TRAVEL_DISABLED`; already-started upstream recovery remains in control.
+The companion monitors a postfix of the pinned `UpdateBothWorlds` method at most four times per second. The 0.2.0 border layer does not change the upstream scheduler, empty-world simulation, quests, or clocks; later companion layers add suspension and a shared calendar. Runtime access to private upstream state is centralized in `MultiWorldBridge`; missing members or incompatible patches prevent activation. Unhandled monitoring errors disable further automatic starts and log `BORDER_TRAVEL_DISABLED`; already-started upstream recovery remains in control.
 
 ## Opt-in configuration
 
@@ -60,4 +60,4 @@ Deployed companion SHA256: `28ae2b0746232d6fee83a3bc3d16bf9b11adec5e72458d35d68e
 
 ## Client results and next prototype
 
-The user confirmed automatic crossings in both directions with newly collected items preserved, followed by successful reconnect and game-server restart persistence checks. Two-player crossings remain untested by explicit user choice. The subsequent [empty-world suspension prototype](world-suspension.md) uses companion 0.3.0 and requires a new client regression check despite retaining the same client package.
+The user confirmed automatic crossings in both directions with newly collected items preserved, followed by successful reconnect and game-server restart persistence checks. Two-player crossings remain untested by explicit user choice. The subsequent [empty-world suspension prototype](world-suspension.md) uses companion 0.3.0 and passed the single-player client regression. Companion 0.4.0 adds a [shared calendar](shared-clock.md), whose server tests passed and client clock check remains pending. The client package is unchanged.
