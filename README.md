@@ -29,6 +29,10 @@ The starting reference is LITW MultiWorld 0.6.2, supplied as a compiled mod. Its
 
 Current gameplay settings are documented in [ANNWN sandbox settings](docs/annwn-sandbox.md), with the versioned preset and native code under `config/`.
 
+## Independent Multiworld replacement
+
+[Multiworld replacement specification](docs/multiworld-replacement/README.md) documents the inspected 0.6.2 architecture, transfer/network/storage contracts, current companion dependencies, implementation stages and acceptance tests. Its evidence inventory covers 119 Harmony patch declarations and 176 top-level static methods. These documents live outside the third-party reference directory so they remain available when that material is removed. This is a documentation milestone; the current runtime still requires Multiworld.
+
 ## Feature backlog
 
 The following features are intended future work; detailed design and implementation order remain open.
@@ -54,4 +58,5 @@ See [the MultiWorld research notes](resources/multiworld/README.md) before attem
 -----
 
 **AI disclaimer:** AI-assisted tools were used in development. The author reviewed and approved the code and documentation and remains responsible for the project.
+
 
