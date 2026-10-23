@@ -18,6 +18,7 @@ namespace SevenDaysBeyond
             internal Vector3 Safe;
             internal bool HasSafe;
             internal float WarnAt, Cooldown;
+            internal int WarningLevel;
             internal Job Pending;
         }
         private sealed class Job
@@ -125,7 +126,7 @@ namespace SevenDaysBeyond
                     if (MultiWorldBridge.Transfer(c) != null) continue;
                     object context = MultiWorldBridge.Resolve(c);
                     if (!MultiWorldBridge.Available(context) || (MultiWorldBridge.Name(context) != "West" && MultiWorldBridge.Name(context) != "East")) continue;
-                    if (state.Context != context) { state.Context = context; state.HasSafe = false; state.WarnAt = 0; }
+                    if (state.Context != context) { state.Context = context; state.HasSafe = false; state.WarnAt = 0; state.WarningLevel = 0; }
                     var w = MultiWorldBridge.World(context);
                     using (MultiWorldBridge.Scope(context))
                     {
@@ -139,14 +140,17 @@ namespace SevenDaysBeyond
                             && SafeLanding.TryAt(w, b, (int)Math.Floor(p.position.x), (int)Math.Floor(p.position.z), out safe)
                             && Math.Abs(p.position.y - safe.y) < 2)
                         { state.Safe = safe; state.HasSafe = true; }
-                        if (distance > BorderPolicy.Warning) continue;
+                        int warningLevel = BorderPolicy.WarningLevel(distance);
+                        if (warningLevel == 0) { state.WarningLevel = 0; continue; }
                         string dest = BorderPolicy.Destination(MultiWorldBridge.Name(context), edge);
-                        if (Time.realtimeSinceStartup >= state.WarnAt)
+                        if (warningLevel > state.WarningLevel || Time.realtimeSinceStartup >= state.WarnAt)
                         {
-                            Say(c, dest == null ? "Map edge ahead. This border is closed; turn back."
-                                : "Border ahead: continue on foot to travel to " + dest + ". Your carried items travel with you.");
+                            string remaining = Math.Max(0, distance - BorderPolicy.Trigger).ToString("0", CultureInfo.InvariantCulture);
+                            Say(c, dest == null ? "Closed border " + remaining + " m ahead. Turn back; reaching it will move you inland."
+                                : "Border " + remaining + " m ahead: continue on foot to travel to " + dest + ". Your carried items travel with you.");
                             state.WarnAt = Time.realtimeSinceStartup + 15;
                         }
+                        state.WarningLevel = warningLevel;
                         if (distance > BorderPolicy.Trigger) continue;
                         if (p.AttachedToEntity != null)
                         {
@@ -345,7 +349,7 @@ namespace SevenDaysBeyond
                         float distance;
                         BorderEdge edge = BorderPolicy.Nearest(b, p.position.x, p.position.z, out distance);
                         Say(c, "World: " + MultiWorldBridge.Name(context) + "; nearest edge: " + edge + "; distance: " + distance.ToString("0", CultureInfo.InvariantCulture)
-                            + " m. Crossing starts 500 m inside the edge; warnings start at 700 m.");
+                            + " m. Travel boundary: " + BorderPolicy.Trigger + " m inside the map edge; warnings: 50 m and 10 m before that boundary.");
                         WorldSuspension.Report(c);
                         SharedClock.Report(c);
                     }

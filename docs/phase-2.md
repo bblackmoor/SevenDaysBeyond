@@ -8,7 +8,7 @@ Companion 0.2.0 introduces the first server-only on-foot border prototype. It do
 
 - West's east edge connects to East's west edge; the reverse route connects East back to West.
 - Bounds come from each actual world's chunk provider. Latitude is mapped proportionally between maps.
-- Warn 700 m inside the map extent, trigger 500 m inside, arrive 600 m inside. These deliberately conservative test margins avoid the outer danger zone. They are not final map seams or matching roads.
+- As of 0.4.1, warn 50 m and 10 m before the travel line (550 m and 510 m inside the raw map extent), trigger 500 m inside, arrive 600 m inside. These deliberately conservative test margins avoid the outer danger zone. They are not final map seams or matching roads.
 - Closed edges warn and attempt an inland retreat. Mounted players receive a warning and cannot cross; vehicles are not moved or transferred by the companion.
 - Before preparation, retreat to checked, loaded ground in the source world. Preload the destination with a temporary chunk observer and search within 32 m of the intended arrival. Abort after 30 seconds if no safe surface is available. Moving more than 16 m from the holding point cancels preparation.
 - Require present chunks without pending decoration or decoration/regeneration/unload in progress, a 3x3 terrain platform, negative solid density, three clear blocks of headroom, no water or damaging/buffing ground, no radiation, and no trader area. This conservatively rejects some otherwise usable slopes and roads. It is not a guarantee against nearby enemies or later world changes.
@@ -60,4 +60,4 @@ Deployed companion SHA256: `28ae2b0746232d6fee83a3bc3d16bf9b11adec5e72458d35d68e
 
 ## Client results and next prototype
 
-The user confirmed automatic crossings in both directions with newly collected items preserved, followed by successful reconnect and game-server restart persistence checks. Two-player crossings remain untested by explicit user choice. The subsequent [empty-world suspension prototype](world-suspension.md) uses companion 0.3.0 and passed the single-player client regression. Companion 0.4.0 adds a [shared calendar](shared-clock.md), whose server tests passed and client clock check remains pending. The client package is unchanged.
+The user confirmed automatic crossings in both directions with newly collected items preserved, followed by successful reconnect and game-server restart persistence checks. Two-player crossings remain untested by explicit user choice. The subsequent [empty-world suspension prototype](world-suspension.md) uses companion 0.3.0 and passed the single-player client regression. Companion 0.4.0 adds a [shared calendar](shared-clock.md), whose server tests passed and client clock behavior was reported working. See [client testing tools](client-testing.md) for the 0.4.1 debug-state update. The client package is unchanged.

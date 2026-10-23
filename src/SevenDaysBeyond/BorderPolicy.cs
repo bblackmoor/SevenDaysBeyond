@@ -22,7 +22,15 @@ namespace SevenDaysBeyond
     // Pure geometry: no world selection, networking, or save access.
     internal static class BorderPolicy
     {
-        public const float Warning = 700, Trigger = 500, Arrival = 600;
+        public const float Trigger = 500, Arrival = 600;
+        public const float EarlyWarningDistance = 50, CloseWarningDistance = 10;
+        public const float Warning = Trigger + EarlyWarningDistance;
+        // Distances are measured from the playable travel line, not the raw map extent.
+        public static int WarningLevel(float mapEdgeDistance)
+        {
+            float remaining = mapEdgeDistance - Trigger;
+            return remaining > EarlyWarningDistance ? 0 : remaining > CloseWarningDistance ? 1 : 2;
+        }
         public static BorderEdge Nearest(MapBounds b, float x, float z, out float distance)
         {
             BorderEdge edge = BorderEdge.West;

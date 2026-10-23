@@ -45,6 +45,7 @@ namespace SevenDaysBeyond
                     + "; game=" + typeof(IModApi).Assembly.ManifestModule.ModuleVersionId
                     + "; upstream binary verified.");
                 if (GameManager.IsDedicatedServer) BorderTravel.Install(type);
+                else ClientDebugState.Install(type);
             }
             catch (Exception error)
             {

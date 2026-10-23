@@ -57,6 +57,8 @@ The diagnostic assembly and `ModInfo.xml` are written to `artifacts/mod/SevenDay
 python -m unittest discover -s tests -v
 ```
 
+The [0.4.1 client testing companion](client-testing.md) can also be installed without `BoundaryTest.xml` to preserve debug settings during a retained-session map transfer. Its hooks install once per client process, only after the unchanged upstream binary passes verification.
+
 The tests exercise actual metadata, all hook signatures, missing dependencies, wrong and modified managed binaries, non-managed input, and checksum rejection. They do not mock the game API or claim to simulate the game.
 
 ## First in-game verification

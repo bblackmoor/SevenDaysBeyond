@@ -51,4 +51,4 @@ At 17:49:18 America/New_York, both maps suspended. Their native ticks/calendar v
 
 Final companion SHA256: `53ceec552524193d05e8e2834a8e324dfdb2a9150fb258f4fcc7708f1300e989`. Final package SHA256: `936ded9195965e9edf7bd44346141da8802437893fb638d79b0b0d4560d0e1fd`.
 
-The user subsequently reported that the 0.3.0 single-player join/crossing regression test passed. Concurrent players remain untested. Companion 0.4.0 retains these suspension gates and adds a separate [shared calendar](shared-clock.md); its client clock check is pending.
+The user subsequently reported that the 0.3.0 single-player join/crossing regression test passed. Concurrent players remain untested. Companion 0.4.0 retains these suspension gates and adds a separate [shared calendar](shared-clock.md); the user reported its client clock check working.

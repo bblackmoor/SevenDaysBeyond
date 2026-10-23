@@ -42,7 +42,12 @@ internal static class BorderPolicyTests
         }
         BorderPolicy.Inland(b,4000,-4000,540,out x,out z);
         Near(x,2532,"retreat x clamped"); Near(z,-2532,"retreat z clamped");
-        Check(BorderPolicy.Warning>BorderPolicy.Arrival && BorderPolicy.Arrival>BorderPolicy.Trigger,"margins ordered");
+        Check(BorderPolicy.Arrival>BorderPolicy.Warning && BorderPolicy.Warning>BorderPolicy.Trigger,"arrival outside warning and crossing zones");
+        Check(BorderPolicy.WarningLevel(550.01f)==0,"no warning beyond 50m from travel line");
+        Check(BorderPolicy.WarningLevel(550)==1,"early warning at exactly 50m");
+        Check(BorderPolicy.WarningLevel(510.01f)==1,"early stage until 10m");
+        Check(BorderPolicy.WarningLevel(510)==2,"close warning at exactly 10m");
+        Check(BorderPolicy.WarningLevel(500)==2,"crossing line remains inside close stage");
         Check(LandingRules.Ground(false,false,true,0,false,-128),"solid terrain accepted");
         Check(!LandingRules.Ground(false,false,true,0,false,127),"air density rejected");
         Check(!LandingRules.Ground(false,false,true,0,false,0),"ambiguous density rejected");

@@ -30,7 +30,7 @@ ANNWN loaded 0.4.0 on 2026-10-21. At 18:10:30 America/New_York it logged `SHARED
 
 At 18:10:59, `SHARED_CLOCK_ADVANCE_PASS` confirmed common time advanced from `17799` to `17811` while both native simulation clocks, game ticks, core and physics counts remained frozen. Actual time packets from both world scopes matched the shared calendar, and the checkpoint round trip passed. At 18:11:01, `SHARED_CLOCK_SELF_TEST_PASS` confirmed subsequent empty-server pause. Through 18:12:45, common time stayed `17811`, East's native time stayed `17799`, and West's stayed `13275`; global task pumping continued. No shared-clock disable or installation failure was observed.
 
-These checks establish server behavior, not the appearance of the client HUD or a live crossing on 0.4.0. The user passed the earlier 0.3.0 single-player regression. Two-player crossings, clock behavior during a real crossing, skipped calendar days/hordes, and an actual restart of 0.4.0 remain untested.
+The user subsequently reported that time appeared to work correctly during the 0.4.0 client crossing test. The user also passed the earlier 0.3.0 single-player regression. Two-player crossings, skipped calendar days/hordes, and an actual restart of 0.4.0 remain untested.
 
 ## Client check
 
