@@ -61,7 +61,7 @@ The tests exercise actual metadata, all hook signatures, missing dependencies, w
 
 ## First in-game verification
 
-The native baseline installation on ANNWN is documented in [annwn-server.md](annwn-server.md). Its single-world server startup has succeeded; a client join and the modded two-world checks below remain pending.
+The native baseline installation on ANNWN is documented in [annwn-server.md](annwn-server.md). Its client join/disconnect test and the subsequent two-world modded server startup have succeeded. The [West/East test](multiworld-test.md) is ready for a modded client to exercise the checks below.
 
 Use a separate test server and two disposable map saves with MultiWorld's normal runtime configuration. Keep its existing client/server installation requirements. Add the built `SevenDaysBeyond` directory to the test server's `Mods` directory.
 

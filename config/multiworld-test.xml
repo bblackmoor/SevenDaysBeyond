@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LITWMultiWorld defaultWorld="West" schemaVersion="1" mode="runtime" storageId="SevenDaysBeyond_Test">
+  <property name="Firstjoinplayer" value="West" />
+  <property name="FastWorldSwitch" value="true" />
+  <property name="PreloadMaps" value="true" />
+  <property name="MapCacheMiB" value="256" />
+  <World id="1" name="West">
+    <property name="GameWorld" value="Navezgane" />
+    <property name="WorldGenSeed" value="SDB_West" />
+    <property name="WorldGenSize" value="6144" />
+    <property name="GameName" value="SDB_Test_West" />
+    <property name="GameMode" value="GameModeSurvival" />
+  </World>
+  <World id="2" name="East">
+    <property name="GameWorld" value="Pregen06k01" />
+    <property name="WorldGenSeed" value="SDB_East" />
+    <property name="WorldGenSize" value="6144" />
+    <property name="GameName" value="SDB_Test_East" />
+    <property name="GameMode" value="GameModeSurvival" />
+  </World>
+</LITWMultiWorld>

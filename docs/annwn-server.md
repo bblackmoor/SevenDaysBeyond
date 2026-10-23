@@ -1,5 +1,7 @@
 # ANNWN baseline server
 
+This page records the original baseline installation. The client join/disconnect test has since succeeded; the active service now runs the separate [two-world test](multiworld-test.md). The baseline saves and configuration are preserved.
+
 ## Installed state
 
 The native Linux dedicated server is installed under `/srv/seven-days-beyond` and runs as the dedicated `chatgpt` Ubuntu account. No Docker is used.
@@ -35,7 +37,7 @@ The service is currently running but is **not enabled at boot** while this is a 
 - The configuration stores saves outside the Steam-updated installation directory.
 - Initial idle memory consumption was approximately 2 GB. This is a single-world baseline, not a MultiWorld capacity measurement.
 
-No player connection or manual world-transfer test has been performed. Only the server's shipped mods are installed; LITW MultiWorld and the diagnostic companion are not yet enabled. Verify the baseline client connection before adding them.
+The baseline player connection and normal disconnect were subsequently confirmed. MultiWorld and the companion were then installed using separate test data; their startup results and outstanding manual-transfer checks are recorded in [multiworld-test.md](multiworld-test.md).
 
 ## Service operations
 

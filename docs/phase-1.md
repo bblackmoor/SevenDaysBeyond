@@ -56,7 +56,8 @@ All names below refer to `MultiWorldProbe` in the supplied 0.6.2 DLL, unless sta
 | Upstream hash and method contracts validated | Complete |
 | Diagnostic companion compiles against actual game assemblies | Complete |
 | Tooling negative cases tested | Complete |
-| Dedicated-server startup with both mods | Pending |
+| Dedicated-server startup with both mods | Complete; West/East ready, runtime hook check passed |
+| Baseline client join and normal disconnect | Complete |
 | Client joins and baseline manual transfers | Pending |
 | Disconnect/restart baseline recorded | Pending |
 

@@ -15,11 +15,11 @@ Vehicle and passenger transfers need separate investigation. Safe arrival, disco
 
 ## Status
 
-Phase 1 build foundation is in place: real dedicated-server dependencies have been acquired, the 12 upstream hook signatures pass inspection, and a diagnostic-only companion mod compiles against the game assemblies. Startup and manual-transfer smoke tests are still pending. The planned gameplay features above have not been implemented or tested in-game.
+Phase 1 build foundation and server startup checks are in place: real dependencies have been acquired, the diagnostic companion compiles and passes all 12 hook checks inside the game, and MultiWorld has loaded two isolated worlds on ANNWN. A real client manual-transfer test is next. The planned gameplay extensions above have not been implemented or tested in-game.
 
 See [development setup](docs/development.md) for dependency acquisition, build commands, and the first in-game checks, and [phase 1 findings](docs/phase-1.md) for integration points and remaining work.
 
-The native dedicated server baseline is running on ANNWN; see [server setup and verification](docs/annwn-server.md). A client connection test is next, before enabling MultiWorld.
+The native server baseline passed a client connection/disconnect test and is preserved. ANNWN now runs the isolated [West/East MultiWorld test](docs/multiworld-test.md); see [the original server setup](docs/annwn-server.md) for installation details.
 
 The starting reference is LITW MultiWorld 0.6.2, supplied as a compiled mod. Its existing configuration accepts 1–64 worlds, but it initializes and updates every configured world. It currently blocks transfers while riding a vehicle and restores destination-specific arrival positions rather than matching map edges.
 
