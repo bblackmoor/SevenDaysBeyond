@@ -1,4 +1,4 @@
-# Four-map grid and character quest book (0.5.0)
+# Four-map grid and character quest book (0.5.1)
 
 ## Test layout
 
@@ -67,3 +67,28 @@ Production routing/landing/suspension rules pass 3,828 assertions, quest-book ma
 The whole server package contains the companion DLL, metadata, boundary/grid config, native test-quest XML and upstream four-map configuration. The deployment helper refuses a running service, verifies exact archive membership and the original upstream DLL, checks old West/East identities and properties, and backs up saves, both mod directories, config and log before replacement. It does not replace the upstream DLL or delete existing maps/saves.
 
 Runtime readiness, memory observations and client test outcomes must be recorded after deployment. For code rollback, stop cleanly and restore both mod directories and any changed server configuration from the new backup; reverting player save data is a separate decision and is unnecessary for ordinary code rollback.
+
+
+## ANNWN deployment history
+
+The initial 0.5.0 deployment loaded all four maps and passed all four landing probes, independent suspension/wake checks, and serialized shared-clock checks. Its quest book correctly remained disabled when the native serializer rejected a missing identity on the unsaved self-test quest. No player journal was modified by that test.
+
+Version 0.5.1 supplies an identity only to that headless fixture. Normal accepted quests retain the game's own identity setup. The pinned build passes all 12 upstream hook checks and 15 dependency checks; the quest-book, border and calendar suites pass 19, 3,828 and 87 assertions respectively.
+
+Deployment package SHA-256: `39b0dbeb163570acd732a1e3272f44134a5e9c6ea23e0c1666d00d1af46a1651`.
+Companion DLL SHA-256: `395e4bc18b61b9d012c59600c3b55a73dd1cecc6a023238c0d233892b0077487`.
+
+The original two-map rollback backup is `/srv/seven-days-beyond/backups/before-grid-quests-20261022T025207613049Z.tar.gz`. The corrective deployment backup is `/srv/seven-days-beyond/backups/before-grid-quests-20261022T162059240758Z.tar.gz` (current four-map state before replacement). Client grid-crossing and native-quest tests remain pending.
+
+On October 22, 2026 at 12:23 p.m. America/New_York, ANNWN completed the 0.5.1 startup checks:
+
+- `MULTIWORLD_READY count=4`: West, East, NorthWest and NorthEast.
+- `QUEST_BOOK_NATIVE_SELF_TEST_PASS` and `QUEST_BOOK_ENABLED`: the game's actual serializer retained partial native objective progress.
+- Four successful `BORDER_SAFETY_PROBE` results.
+- `SUSPENSION_SELF_TEST_PASS`: all-empty freeze, continuing global tasks, independent West reservation wake and refreeze.
+- `SHARED_CLOCK_SELF_TEST_PASS`: equal serialized time on all four maps, native simulation clocks frozen, empty-server pause and persisted calendar reload.
+- Service active, PID 87771, zero automatic restarts; observed `MemoryCurrent=6324625408` bytes (about 5.9 GiB) immediately after startup.
+
+The Gateway package check ended with an indeterminate `scanner_service_503` result and made the artifact available. Typed artifact installation independently verified the package SHA-256 before staging; the deployment helper verified it again before replacement. This is not a scanner no-detection result.
+
+No client installation change is needed for these server features. The existing 0.4.1 client companion continues to preserve debug settings. Player quest progress through crossings, reconnects and a later controlled restart, the full eight-direction grid circuit, active POI/party interactions and two-player crossings still require in-game checks. Startup tests do not establish those outcomes.

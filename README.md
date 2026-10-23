@@ -17,7 +17,7 @@ Vehicle and passenger transfers need separate investigation. Safe arrival, disco
 
 The West/East prototype passed single-player manual and automatic crossings, inventory checks, reconnects, controlled restart persistence, empty-world suspension, and the corrected shared-clock HUD check. God Mode persistence also passed with the 0.4.1 client companion.
 
-Companion 0.5.0 expands to a [2 × 2 grid and character quest book](docs/grid-quests.md), with north/south routing, map-qualified quest snapshots, an all-map quest list, a grantable native quest fixture and repeatable travel/deadline tests. Native quest-window presentation remains specific to the current map. Runtime deployment and client checks for 0.5.0 are pending. Two-player crossings, a merged native all-map journal UI, generic third-party quest deadline conversion, vehicles and the full 64-map scale remain future work.
+Companion 0.5.1 expands to a [2 × 2 grid and character quest book](docs/grid-quests.md), with north/south routing, map-qualified quest snapshots, an all-map quest list, a grantable native quest fixture and repeatable travel/deadline tests. Native quest-window presentation remains specific to the current map. Version 0.5.1 is deployed on ANNWN: all four maps, native quest serialization, landing probes, suspension/wake and serialized shared-clock startup checks passed. Client grid-crossing and quest-progress checks are pending. Two-player crossings, a merged native all-map journal UI, generic third-party quest deadline conversion, vehicles and the full 64-map scale remain future work.
 
 See [development setup](docs/development.md) for dependency acquisition, build commands, and the first in-game checks, and [phase 1 findings](docs/phase-1.md) for integration points and remaining work.
 
@@ -42,3 +42,4 @@ See [the MultiWorld research notes](resources/multiworld/README.md) before attem
 -----
 
 **AI disclaimer:** AI-assisted tools were used in development. The author reviewed and approved the code and documentation and remains responsible for the project.
+
