@@ -69,3 +69,7 @@ The upstream SteamCMD Linux installer was downloaded from `https://steamcdn-a.ak
 ## Next verification
 
 From a LAN gaming PC running V 3.3.0, use the game's direct-IP connection to ANNWN's LAN address on port 26900. Confirm entry into the world, then disconnect normally. After that succeeds, add MultiWorld and the companion, using separate disposable saves for the two-world tests in [development.md](development.md).
+
+## Phase 2 test deployment
+
+The user confirmed the manual two-world baseline, reconnect, and game-server restart checks. The server now runs the opt-in companion 0.2.0 for the [automatic border test](phase-2.md), using the same isolated saves and upstream client package. The prior companion and saves were backed up before updating. Both actual-map landing probes passed after the headless lighting-readiness correction. Real client automatic crossings remain pending.

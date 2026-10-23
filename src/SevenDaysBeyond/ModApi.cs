@@ -6,13 +6,13 @@ using System.Security.Cryptography;
 
 namespace SevenDaysBeyond
 {
-    // Phase 1 only: diagnostics after every mod has initialized. No Harmony patches.
+    // Validate the pinned upstream contract before enabling optional travel patches.
     public sealed class ModApi : IModApi
     {
         public void InitMod(Mod mod)
         {
             ModEvents.GameStartDone.RegisterHandler(OnGameStartDone);
-            Log.Out("[SevenDaysBeyond] Phase 1 diagnostics registered; gameplay extensions are inactive.");
+            Log.Out("[SevenDaysBeyond] Compatibility checks registered; border travel requires opt-in configuration.");
         }
 
         private static void OnGameStartDone(ref ModEvents.SGameStartDoneData data)
@@ -43,11 +43,12 @@ namespace SevenDaysBeyond
                 }
                 Log.Out("[SevenDaysBeyond] UPSTREAM_CONTRACT_OK hooks=" + MultiWorldContract.Hooks.Length
                     + "; game=" + typeof(IModApi).Assembly.ManifestModule.ModuleVersionId
-                    + "; diagnostic only; no gameplay patches installed.");
+                    + "; upstream binary verified.");
+                if (GameManager.IsDedicatedServer) BorderTravel.Install(type);
             }
             catch (Exception error)
             {
-                Log.Warning("[SevenDaysBeyond] UPSTREAM_CONTRACT_FAILED: " + error.Message
+                Log.Warning("[SevenDaysBeyond] INITIALIZATION_FAILED: " + error.Message
                     + "; gameplay extensions remain inactive.");
             }
         }

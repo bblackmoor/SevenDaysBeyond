@@ -2,8 +2,8 @@
 <xml>
   <Name value="SevenDaysBeyond" />
   <DisplayName value="Seven Days Beyond" />
-  <Description value="Phase 1 compatibility diagnostics. Automatic crossings are not implemented." />
+  <Description value="Experimental two-world on-foot border travel with compatibility diagnostics." />
   <Author value="Brandon Blackmoor" />
-  <Version value="0.1.0" />
+  <Version value="0.2.0" />
   <SkipWithAntiCheat value="true" />
 </xml>

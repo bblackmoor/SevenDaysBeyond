@@ -39,12 +39,12 @@ def sdk_paths(dotnet):
     return sdk / "Roslyn/bincore/csc.dll", max(packs, key=version_key) / "ref/net8.0"
 
 
-def compile_sources(dotnet, compiler, sources, references, output, executable=False):
+def compile_sources(dotnet, compiler, sources, references, output, executable=False, nullable=True):
     output.parent.mkdir(parents=True, exist_ok=True)
     command = [dotnet, compiler, "-noconfig", "-nostdlib+", "-nologo", "-deterministic+",
                "-warnaserror+", "-target:" + ("exe" if executable else "library"),
                "-langversion:" + ("12" if executable else "7.3"), "-out:" + str(output)]
-    if executable:
+    if executable and nullable:
         command += ["-nullable:enable"]
     command += ["-reference:" + str(p) for p in references]
     command += list(sources)
@@ -121,15 +121,21 @@ def main():
                              + ". Use the pinned download or inspect the new game build before updating the lock.")
     report["GameSdkPinned"] = True
     report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+    # Unity/Harmony APIs expose netstandard facade types. Pin the game facade too.
+    facade = args.managed.resolve() / "netstandard.dll"
+    import hashlib
+    if hashlib.sha256(facade.read_bytes()).hexdigest() not in pinned_hashes:
+        raise ValueError("Game netstandard facade differs from the pinned SDK.")
+    report["CompilerReferences"].append(str(facade))
     # Compile against the actual game's framework, never .NET 8 runtime assemblies.
     output = artifacts / "mod/SevenDaysBeyond/SevenDaysBeyond.dll"
     compile_sources(dotnet, compiler,
                     sorted((ROOT / "src/SevenDaysBeyond").rglob("*.cs")) + [ROOT / "src/Shared/MultiWorldContract.cs"],
                     [Path(p) for p in report["CompilerReferences"]], output)
     shutil.copy2(ROOT / "src/SevenDaysBeyond/ModInfo.xml", output.parent / "ModInfo.xml")
-    report["DiagnosticBuildSucceeded"] = True
+    report["ModBuildSucceeded"] = True
     report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
-    print("Diagnostic mod built: " + str(output.parent))
+    print("Travel mod built: " + str(output.parent))
     print("Game startup and manual transfers must still be tested; this command does not deploy anything.")
     return 0
 

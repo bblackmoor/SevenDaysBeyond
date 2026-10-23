@@ -58,7 +58,9 @@ All names below refer to `MultiWorldProbe` in the supplied 0.6.2 DLL, unless sta
 | Tooling negative cases tested | Complete |
 | Dedicated-server startup with both mods | Complete; West/East ready, runtime hook check passed |
 | Baseline client join and normal disconnect | Complete |
-| Client joins and baseline manual transfers | Pending |
-| Disconnect/restart baseline recorded | Pending |
+| Client joins and baseline manual transfers | Complete; user confirmed repeated transfers, inventory and return location |
+| Disconnect/restart baseline recorded | Complete; user confirmed reconnect and game-server restart persistence |
 
 Phase 2 boundary-crossing work should proceed after the baseline in-game checks establish a known working installation. See [development.md](development.md) for commands and the smoke-test procedure.
+
+Phase 1 exit criteria were met on 2026-10-21. See [Phase 2](phase-2.md) for the first optional border implementation and its separate test status.

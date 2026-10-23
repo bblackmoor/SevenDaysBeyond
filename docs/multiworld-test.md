@@ -9,14 +9,14 @@ The active `seven-days-beyond.service` now uses:
 - Server configuration: `/srv/seven-days-beyond/config/multiworld.xml`
 - Separate user data: `/srv/seven-days-beyond/data-multiworld`
 - Log: `/srv/seven-days-beyond/logs/multiworld.log`
-- Unmodified LITW MultiWorld 0.6.2 and SevenDaysBeyond 0.1.0 diagnostics in the server's `Mods` directory
+- Unmodified LITW MultiWorld 0.6.2 and SevenDaysBeyond 0.2.0 border companion in the server's `Mods` directory
 
 | World command | Map | Disposable save |
 | --- | --- | --- |
 | `/world West` | Navezgane | SDB_Test_West |
 | `/world East` | Pregen06k01 | SDB_Test_East |
 
-The mod configuration is maintained in `config/multiworld-test.xml`. It uses runtime mode, two worlds, a separate storage ID, shared character progression, and West for first arrival. These labels establish the two-world test; no geographic adjacency or automatic edge-crossing behavior has been implemented yet.
+The mod configuration is maintained in `config/multiworld-test.xml`. It uses runtime mode, two worlds, a separate storage ID, shared character progression, and West for first arrival. The opt-in [Phase 2 companion](phase-2.md) now links West's east border to East's west border.
 
 ## Server verification
 
@@ -41,7 +41,7 @@ The private client test ZIP contains the unmodified upstream DLL, its ModInfo, t
 6. After at least ten seconds, enter `/world West`. Confirm inventory, character progression, and the saved West location.
 7. Disconnect normally, reconnect, and check inventory and world selection. Tell the assistant when ready for a controlled server restart and another check.
 
-The transfer remains command-driven and on foot. The upstream mod blocks mounted transfers. Manual transfer, reconnect, and restart recovery still need a real client test.
+The user confirmed repeated manual transfers, inventory preservation, return locations, reconnect persistence, and controlled server-restart persistence. Automatic on-foot travel is now installed for the next client test; follow [Phase 2 instructions](phase-2.md). The upstream mod still blocks mounted transfers.
 
 ## Rollback to baseline
 

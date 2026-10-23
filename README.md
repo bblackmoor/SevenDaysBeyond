@@ -15,7 +15,7 @@ Vehicle and passenger transfers need separate investigation. Safe arrival, disco
 
 ## Status
 
-Phase 1 build foundation and server startup checks are in place: real dependencies have been acquired, the diagnostic companion compiles and passes all 12 hook checks inside the game, and MultiWorld has loaded two isolated worlds on ANNWN. A real client manual-transfer test is next. The planned gameplay extensions above have not been implemented or tested in-game.
+The two-world baseline passed repeated manual transfers, inventory/location checks, reconnects, and a controlled server restart on ANNWN. Phase 2 now provides an opt-in server companion for automatic on-foot West/East border crossings, boundary warnings, destination preloading and ground checks, and request-bound arrival placement. Real client automatic-crossing tests are pending; see [the Phase 2 test](docs/phase-2.md). The full 64-map grid, frozen simulation, shared clock and portable quests remain planned.
 
 See [development setup](docs/development.md) for dependency acquisition, build commands, and the first in-game checks, and [phase 1 findings](docs/phase-1.md) for integration points and remaining work.
 
@@ -25,7 +25,7 @@ The starting reference is LITW MultiWorld 0.6.2, supplied as a compiled mod. Its
 
 ## Repository layout
 
-- `src/SevenDaysBeyond/` — diagnostic companion mod; future gameplay implementation.
+- `src/SevenDaysBeyond/` — compatibility checks and experimental two-world on-foot travel.
 - `src/Shared/` — pinned upstream hook contract shared by the runtime diagnostic and metadata tool.
 - `tools/` — dependency acquisition, metadata inspection, collection, and build commands.
 - `config/dependencies.lock.json` — Steam manifest and dependency checksums.

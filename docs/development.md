@@ -1,6 +1,6 @@
 # Development setup
 
-Phase 1 provides a dependency inspector and a diagnostic-only companion mod. It does not install Harmony patches or change travel, saves, clocks, quests, or world scheduling.
+The project provides a dependency inspector, runtime compatibility checks, and an opt-in Phase 2 on-foot border companion. Without BoundaryTest.xml, the companion installs no travel patches. See [Phase 2](phase-2.md) for scope and client testing.
 
 ## Prerequisites
 
@@ -61,16 +61,16 @@ The tests exercise actual metadata, all hook signatures, missing dependencies, w
 
 ## First in-game verification
 
-The native baseline installation on ANNWN is documented in [annwn-server.md](annwn-server.md). Its client join/disconnect test and the subsequent two-world modded server startup have succeeded. The [West/East test](multiworld-test.md) is ready for a modded client to exercise the checks below.
+The native baseline installation on ANNWN is documented in [annwn-server.md](annwn-server.md). Its client join/disconnect test and the subsequent two-world modded server startup have succeeded. The [West/East test](multiworld-test.md) also passed repeated manual transfers, inventory/location checks, reconnects, and a server restart. The checks below describe that baseline; automatic crossings require a separate [Phase 2 test](phase-2.md).
 
 Use a separate test server and two disposable map saves with MultiWorld's normal runtime configuration. Keep its existing client/server installation requirements. Add the built `SevenDaysBeyond` directory to the test server's `Mods` directory.
 
-1. Start the server and check for `UPSTREAM_CONTRACT_OK hooks=12` in its log. A failure logs the reason; the companion installs no patches.
+1. Start the server and check for `UPSTREAM_CONTRACT_OK hooks=12` in its log. A failure logs the reason and prevents border patch activation.
 2. Join using an appropriately modded client. Verify the normal `/world` transfer in both directions, inventory and progression, and each destination's saved position.
 3. Disconnect, reconnect, restart the server, and confirm those baseline behaviors still work.
 4. Record the exact game version, startup log, assembly module IDs, and results before enabling future travel changes.
 
-No in-game smoke test has been run in this workspace. The selective dependency download does not contain a runnable dedicated server. A clean compile and metadata check establish build readiness, not runtime compatibility or reliable transfers.
+The baseline in-game smoke test was run on ANNWN, not in this workspace. The selective dependency download does not contain a runnable dedicated server. A clean compile and metadata check establish build readiness, not runtime compatibility or reliable transfers.
 
 ## Improved decompilation
 
