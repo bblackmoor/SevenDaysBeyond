@@ -18,6 +18,8 @@ namespace SevenDaysBeyond
         private static bool enabled, running;
         private static Harmony harmony;
         private static float saveAt, reportAt;
+        private static float clientSyncAt;
+        private static long wirePackets;
         private static readonly Dictionary<MethodBase,int> expectedReads=new Dictionary<MethodBase,int>();
         private static readonly Dictionary<World,object> contexts=new Dictionary<World,object>();
         internal static bool Enabled { get { return enabled; } }
@@ -75,8 +77,11 @@ namespace SevenDaysBeyond
             {
                 foreach(MethodBase target in expectedReads.Keys) harmony.Patch(target,transpiler:HM("CalendarReads"));
                 harmony.Patch(AccessTools.Method(typeof(NetPackageWorldTime),"Setup"),prefix:HM("PacketTime"));
-                harmony.Patch(AccessTools.Method(typeof(NetPackageWorldInfo),"Setup"),prefix:HM("JoinTime"));
-                harmony.Patch(AccessTools.Method(typeof(GameServerInfo),"UpdateGameTimePlayers"),prefix:HM("PacketTime"));
+                harmony.Patch(AccessTools.Method(typeof(NetPackageWorldTime),"write"),transpiler:HM("WireClock"));
+                var browser=HM("PacketTime"); browser.priority=Priority.Last;
+                harmony.Patch(AccessTools.Method(typeof(GameServerInfo),"UpdateGameTimePlayers"),prefix:browser);
+                harmony.Patch(MultiWorldBridge.Method("SendTransferResult"),postfix:HM("AfterTransfer"));
+                harmony.Patch(AccessTools.Method(typeof(GameManager),"PlayerSpawnedInWorld"),postfix:HM("AfterPlayerSpawned"));
                 // Update before occupancy evaluation and native per-world ticking.
                 var before=HM("BeforeFrame"); before.priority=Priority.First;
                 harmony.Patch(MultiWorldBridge.Method("UpdateBothWorlds"),prefix:before,postfix:HM("AfterFrame"));
@@ -85,7 +90,7 @@ namespace SevenDaysBeyond
                 foreach(object c in all) WorldResumed(c);
                 Publish(); clock.Save(path); saveAt=Time.realtimeSinceStartup+10;
                 if(selfTest) SharedClockSelfTest.Enable();
-                Log.Out("[SevenDaysBeyond] SHARED_CLOCK_ENABLED time="+Now+" calendarMethods="+expectedReads.Count+" storage="+path+"; native simulation clocks preserved; pauses when all clients leave.");
+                Log.Out("[SevenDaysBeyond] SHARED_CLOCK_ENABLED time="+Now+" calendarMethods="+expectedReads.Count+" storage="+path+"; native simulation clocks preserved; wire clock enforced; arrival and 1s client synchronization; pauses when all clients leave.");
             }
             catch { enabled=false; harmony.UnpatchSelf(); throw; }
         }
@@ -111,7 +116,44 @@ namespace SevenDaysBeyond
         private static ulong ReadBase(WorldBase world)
         { return enabled && world is World && contexts.ContainsKey((World)world)?Now:world.GetWorldTime(); }
         private static void PacketTime(ref ulong __0) { if(enabled) __0=Now; }
-        private static void JoinTime(ref ulong __5) { if(enabled) __5=Now; }
+        // Enforce the calendar where bytes are written, including previously compiled/inlined Setup callers.
+        private static System.Collections.Generic.IEnumerable<CodeInstruction> WireClock(System.Collections.Generic.IEnumerable<CodeInstruction> input)
+        {
+            FieldInfo field=AccessTools.Field(typeof(NetPackageWorldTime),"worldTime");
+            int count=0;
+            foreach(CodeInstruction instruction in input)
+            {
+                yield return instruction;
+                if(instruction.opcode==OpCodes.Ldfld && Equals(instruction.operand,field))
+                { count++; yield return new CodeInstruction(OpCodes.Call,AccessTools.Method(typeof(SharedClock),"WireTime")); }
+            }
+            if(count!=1) throw new InvalidOperationException("World-time serialization contract changed.");
+        }
+        private static ulong WireTime(ulong native)
+        {
+            if(!enabled) return native;
+            System.Threading.Interlocked.Increment(ref wirePackets);
+            return Now;
+        }
+        private static void SynchronizeClient(ClientInfo client)
+        {
+            if(!enabled || client==null || !client.loginDone || !client.bAttachedToEntity || client.entityId<0) return;
+            object context=MultiWorldBridge.Resolve(client);
+            if(!MultiWorldBridge.Available(context) || MultiWorldBridge.World(context).GetEntity(client.entityId)==null) return;
+            client.SendPackage(NetPackageManager.GetPackage<NetPackageWorldTime>().Setup(Now));
+        }
+        private static void AfterTransfer(ClientInfo __0, bool __2)
+        {
+            if(!enabled || !__2) return;
+            try { SynchronizeClient(__0); }
+            catch(Exception e) { Disable(e); }
+        }
+        private static void AfterPlayerSpawned(ClientInfo __0)
+        {
+            if(!enabled) return;
+            try { SynchronizeClient(__0); }
+            catch(Exception e) { Disable(e); }
+        }
         private static void BeforeFrame()
         {
             if(!enabled || !MultiWorldBridge.Ready) return;
@@ -139,10 +181,16 @@ namespace SevenDaysBeyond
             Publish();
             SharedClockSelfTest.Tick();
             float now=Time.realtimeSinceStartup;
+            if(now>=clientSyncAt)
+            {
+                clientSyncAt=now+1;
+                foreach(ClientInfo client in SingletonMonoBehaviour<ConnectionManager>.Instance.Clients.List)
+                    if(MultiWorldBridge.Transfer(client)==null) SynchronizeClient(client);
+            }
             if(now>=saveAt) { clock.Save(path); saveAt=now+10; }
             if(now<reportAt) return;
             reportAt=now+15;
-            Log.Out("[SevenDaysBeyond] SHARED_CLOCK time="+Now+" running="+running+"; "+string.Join("; ",contexts.Values.Select(c=>MultiWorldBridge.Name(c)+" simulation="+MultiWorldBridge.World(c).worldTime)));
+            Log.Out("[SevenDaysBeyond] SHARED_CLOCK time="+Now+" running="+running+" wirePackets="+System.Threading.Interlocked.Read(ref wirePackets)+"; "+string.Join("; ",contexts.Values.Select(c=>MultiWorldBridge.Name(c)+" simulation="+MultiWorldBridge.World(c).worldTime)));
             }
             catch(Exception e) { Disable(e); }
         }

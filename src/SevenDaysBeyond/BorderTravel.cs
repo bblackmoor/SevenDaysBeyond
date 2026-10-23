@@ -70,7 +70,7 @@ namespace SevenDaysBeyond
                 if (config.DocumentElement.GetAttribute("sharedClock") == "true")
                     SharedClock.Configure(config.DocumentElement.GetAttribute("clockSelfTest") == "true");
                 enabled = true;
-                Log.Out("[SevenDaysBeyond] BORDER_TRAVEL_ENABLED West/east <-> East/west; warning=700m; trigger=500m; arrival=600m; on-foot only; approachCommand=" + allowApproach);
+                Log.Out("[SevenDaysBeyond] BORDER_TRAVEL_ENABLED West/east <-> East/west; warnings=50m/10m before travel line; trigger=500m; arrival=600m; on-foot only; approachCommand=" + allowApproach);
             }
             catch { harmony.UnpatchSelf(); throw; }
         }

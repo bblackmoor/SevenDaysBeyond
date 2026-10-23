@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using System.IO;
 using UnityEngine;
 
 namespace SevenDaysBeyond
@@ -49,7 +50,7 @@ namespace SevenDaysBeyond
                 if(SharedClock.Now!=start) throw new InvalidOperationException("Empty-server calendar did not pause.");
                 CheckPackets(); SharedClock.SaveAndVerify();
                 enabled=false;
-                Log.Out("[SevenDaysBeyond] SHARED_CLOCK_SELF_TEST_PASS common calendar, frozen worlds, equal packet time, empty-server pause, persisted reload.");
+                Log.Out("[SevenDaysBeyond] SHARED_CLOCK_SELF_TEST_PASS common calendar, frozen worlds, equal serialized packet bytes, empty-server pause, persisted reload.");
             }
         }
         private static void AssertFrozen()
@@ -70,6 +71,20 @@ namespace SevenDaysBeyond
                 {
                     var packet=new NetPackageWorldTime().Setup(MultiWorldBridge.World(c).worldTime);
                     if((ulong)time.GetValue(packet)!=SharedClock.Now) throw new InvalidOperationException("Client packet time differed between maps.");
+                    // Bypass Setup's already-tested value to exercise the actual outgoing byte path.
+                    time.SetValue(packet,MultiWorldBridge.World(c).worldTime);
+                    using(var stream=new MemoryStream())
+                    using(var writer=new PooledBinaryWriter())
+                    {
+                        writer.SetBaseStream(stream);
+                        packet.write(writer); writer.Flush();
+                        using(var reader=new BinaryReader(new MemoryStream(stream.ToArray())))
+                        {
+                            reader.ReadUInt16(); // Normal stock package id, followed by the UInt64 clock.
+                            if(reader.ReadUInt64()!=SharedClock.Now || reader.BaseStream.Position!=reader.BaseStream.Length)
+                                throw new InvalidOperationException("Serialized client clock differed from the calendar.");
+                        }
+                    }
                 }
         }
     }
