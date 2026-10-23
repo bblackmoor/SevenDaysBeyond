@@ -1,0 +1,9 @@
+# Local build and game dependencies
+**/bin/
+**/obj/
+.vs/
+.idea/
+*.user
+*.suo
+local-dependencies/
+# Preserve the original supplied reference binary.
