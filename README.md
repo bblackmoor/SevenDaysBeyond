@@ -15,12 +15,19 @@ Vehicle and passenger transfers need separate investigation. Safe arrival, disco
 
 ## Status
 
-Research and project setup. The planned features above have not been implemented or tested in-game.
+Phase 1 build foundation is in place: real dedicated-server dependencies have been acquired, the 12 upstream hook signatures pass inspection, and a diagnostic-only companion mod compiles against the game assemblies. Startup and manual-transfer smoke tests are still pending. The planned gameplay features above have not been implemented or tested in-game.
+
+See [development setup](docs/development.md) for dependency acquisition, build commands, and the first in-game checks, and [phase 1 findings](docs/phase-1.md) for integration points and remaining work.
 
 The starting reference is LITW MultiWorld 0.6.2, supplied as a compiled mod. Its existing configuration accepts 1–64 worlds, but it initializes and updates every configured world. It currently blocks transfers while riding a vehicle and restores destination-specific arrival positions rather than matching map edges.
 
 ## Repository layout
 
+- `src/SevenDaysBeyond/` — diagnostic companion mod; future gameplay implementation.
+- `src/Shared/` — pinned upstream hook contract shared by the runtime diagnostic and metadata tool.
+- `tools/` — dependency acquisition, metadata inspection, collection, and build commands.
+- `config/dependencies.lock.json` — Steam manifest and dependency checksums.
+- `docs/` — development setup, integration findings, and verification status.
 - `resources/multiworld/original/` — supplied archive and unchanged extracted mod files.
 - `resources/multiworld/decompiled/` — reconstructed C# for inspection, not the author's original source.
 - `resources/multiworld/analysis/` — implementation findings and dependency information.

@@ -1,0 +1,663 @@
+{
+  "schemaVersion": 1,
+  "appId": 294420,
+  "depotId": 294422,
+  "manifestId": "3031329678505041777",
+  "os": "linux",
+  "branchAtAcquisition": "public",
+  "upstreamSha256": "946e95cc22a2e27a1d7e8e2114554966f97970d42042088cee3577dbb6ce5bd6",
+  "files": [
+    {
+      "path": "7DaysToDieServer_Data/Managed/Accessibility.dll",
+      "sha256": "f6b4a2687cc575dc9bf5884af900b0d855b4ffc0399865a1ed52b6af97a86fde"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/AmplifyShaderEditor.Samples.BuiltIn.dll",
+      "sha256": "ac3ad11d910b1d4271386af40fdfc5f83c418e4bcec31ea1c3413cc8ec5f2c09"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Antlr3.Runtime.dll",
+      "sha256": "aa0624c73874768af59260568b91ba8eb7c9ea5bb4bdb3f3e7767b61c8d0feee"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Assembly-CSharp-firstpass.dll",
+      "sha256": "334f3a4cf5ec46f5e38bd3f5b1d80cd3ad1aacb2a7832541e57d3d3c8223bc05"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Assembly-CSharp.dll",
+      "sha256": "e16ff9d539b8fbf64904c0bc090d502286a62464742a9396f0455936ad0beb87"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/AstarPathfindingProject.dll",
+      "sha256": "4e5d367c240122f5aae6cfbdc6e0dd9ca06c34c2fed107458ab33aa0134197dc"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/BhvrAnalytics.dll",
+      "sha256": "e714b25a6ab1096faee242cdb80619305536f517d8304c9c5484d4907c1473e9"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/BhvrAnalyticsMS.dll",
+      "sha256": "b609409e8a3c6e84d3d4d519ec05595bcac325ba3cfe3d0a9f6bbdc71e0ca847"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Discord.Sdk.dll",
+      "sha256": "4c3cc100ba165cd1f9d5513bd3a87d5c8d0567987add11b18f0c339e00823a91"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/EOS.dll",
+      "sha256": "2a734030a6858bca292cca57c6cfa29de237de808abce2648964cd1b2c9185ec"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/HBAO.Demo.Runtime.dll",
+      "sha256": "cda11b66dd8eb4ca73eae0f427c1a421d3fbc32e2e8a08d84a213cd7f7c128e1"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/HBAO.Runtime.dll",
+      "sha256": "11f4b30a4c9c1cc7548c0f8421fb6b68aa37c941ac819a20977944482748d2ab"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/InControl.Examples.dll",
+      "sha256": "db592dbf6c270c1768b6072e1c74ba7c2dd9ec4f715d02881166186eedcc21a3"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/InControl.dll",
+      "sha256": "194388c9a10534b0129e9d018049864810a56ed397f28e612aa98be9472ea97d"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/LiteNetLib.dll",
+      "sha256": "027645d2a4bef5658ddb5cd6f58e62b17a2246183c3b410b1bfd460f6d1f2b2a"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/LogLibrary.dll",
+      "sha256": "85c1e3b2b6ae1070873dc226a602df295a1423b163f27dc157659ceacedf375b"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/MemoryPack.dll",
+      "sha256": "2e183f2dd95bb465dc3069ab20415c6570aae8e7eb7a88287c4287d37dadfbf7"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Microsoft.Bcl.AsyncInterfaces.dll",
+      "sha256": "295af2142d9214f3fd84eafe4778dca119be7e0229f14b6ba8d5269c2f1e2e78"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Mono.Posix.dll",
+      "sha256": "664fe4f66ced4f78f2e645e914291c952d231455921189c3620f3e14512583a3"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Mono.Security.dll",
+      "sha256": "997fbe6782d758b61ccf9f2ccee20cde2286e06c497d6aee1167252e54ec94aa"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Mono.WebBrowser.dll",
+      "sha256": "335b9605ea1c46c335ca9fbddadc1ae53212c6eb89f881216077dedf9b3a5c3f"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/NCalc.dll",
+      "sha256": "9250c57c8bc313810fa185f5ebe9f5f048b6edcef779c5c4e54e4c4b3a361563"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/NGUI.dll",
+      "sha256": "b117030a6531ebbde00333fd7c7b6bd220a563c52ddae8fcd4f5745ecdfeb24e"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Newtonsoft.Json.dll",
+      "sha256": "a56146202232958f46bd6a28b5a7da166aea123ee0d646735a46e5c341dfbf1f"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Noemax.GZip.dll",
+      "sha256": "9a92198cb65d3b62300713f00b6fca3dc41a910772c006d8c54ef78b87ff58d1"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Pathfinding.ClipperLib.dll",
+      "sha256": "4651eba68167202db81c212f445e23a2742560d70b605c0b367ad26a4d8dc1b3"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Pathfinding.Ionic.Zip.Reduced.dll",
+      "sha256": "481cc0f9a53a9ba94f8ea3fc0fb2a520b41812c2fdc6ab10581751eada743d34"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Pathfinding.Poly2Tri.dll",
+      "sha256": "6d37c20001d050b2bfd5071d64ee19f7fd7415e021e8122f1e9070613e4d570b"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Polly.Core.dll",
+      "sha256": "11044ff90c145f7379d3c747d7f8b4e84d9ae6e4cd6ad3c6d3fde08f382e3532"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Polly.dll",
+      "sha256": "cc8cec6de146d208c724b7cec5bd666c386f591e04a7a627e7f4f16ad91400b2"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/ScreenSpaceReflections.dll",
+      "sha256": "e34562e19dfa1106b510238a776202f6a5d439d078da76db87b0cf3b64b690d0"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/SpaceWizards_HttpListener.dll",
+      "sha256": "bc99e27a455b7f77218339ae53930c1f4e2ed72b4610fe09a7f24cb41300bb1c"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/System.ComponentModel.Composition.dll",
+      "sha256": "3c820f5f0f17dabf7b0ae810f5f8416747d4e941333c29ba7101383026ed297a"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/System.ComponentModel.DataAnnotations.dll",
+      "sha256": "aa5eddcfee3299de6940d058fff3ec09659e31be964b07b6480b6696467c2519"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/System.Configuration.Install.dll",
+      "sha256": "8ab4d6f7726a2a3b233d1120f2cdfe5908b100e57fbe7e52c42c58f09a54d254"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/System.Configuration.dll",
+      "sha256": "74715e695d8b3fb9b812b613da1c58f2016534d51e732a7e31987621314a92ab"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/System.Core.dll",
+      "sha256": "8595625ec9846fc28cfc35c7920afd1ca7633b4d655babafaf240426320b91f1"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/System.Data.DataSetExtensions.dll",
+      "sha256": "b66d0f739c5aa4c07d58c5df8443818110b634c59555012f3723171d81d8de09"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/System.Data.dll",
+      "sha256": "6f7d1111a74e6d18037de6417bea995124ee1720fd7e50cfbc28a5cbff0bf927"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/System.Drawing.dll",
+      "sha256": "0b45091f7f2d6c68bd9b82bc2c60b03e3fbdd4244be8014f9df0267ec3c84546"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/System.EnterpriseServices.dll",
+      "sha256": "1edfd12a96315f198fb48854790b34e33368b79e34fbd03987d7a571720b9725"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/System.IO.Compression.FileSystem.dll",
+      "sha256": "8001293d1ec63b788360c7f9d4925a3c46ed5436196bbd2a95d940647c3ac9fa"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/System.IO.Compression.dll",
+      "sha256": "f47391c93479d8a540999b7ccd84aae1223e3f6e5a52a4c0d5e903aa14a8b2cc"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/System.Net.Http.dll",
+      "sha256": "3321969722a1861520ea69adde58147ca0912429611d8e1113622ea1f7f83759"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/System.Numerics.dll",
+      "sha256": "ddbcc1f65468de4fbb92abb88bf53cb766b8398e88e11eca4d0444404f2e5910"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/System.Runtime.CompilerServices.Unsafe.dll",
+      "sha256": "2b4eb652a3748bffc734c39e6c352b17472f4a115ae683258429877540fe71c5"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/System.Runtime.Serialization.dll",
+      "sha256": "db71672507e174f2b0f476a7a16f58c23c0b005f5290d54e9e85fbe41304508a"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/System.Runtime.dll",
+      "sha256": "fbc8607d8c4312460f5234c1950a74d098ff8cab5abcc1a093e55b2bbed75d30"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/System.Security.dll",
+      "sha256": "327930877b87f38768bc19994b23025c966047907cb90c3bbeef734791c73bbb"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/System.ServiceModel.Internals.dll",
+      "sha256": "3769d417ff5ad79c51a3a73c1b3bae8dd65d2fa755e8432b7bd62665dc8adf14"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/System.ServiceProcess.dll",
+      "sha256": "833a0cb023076b64405336d2214e694599a93779df2d78be60a9fa1d19f125bb"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/System.Threading.Tasks.Extensions.dll",
+      "sha256": "96150abdca5df4446b376560e069d59b3550212deda8cbdd316272f6b834f597"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/System.Transactions.dll",
+      "sha256": "d18802b621dd1d040a4b84caa986602291ae943f741e400643f8ffec94f012eb"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/System.Windows.Forms.dll",
+      "sha256": "cebb8f820c0b66795b31a87461b45952401bf3693344254d3a732337ffb58ffc"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/System.Xml.Linq.dll",
+      "sha256": "80198e85a2cf6cd36d8d6a782bd049db919cb6466268ffa409e76c55a452e490"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/System.Xml.dll",
+      "sha256": "6dbdb8e2f50c368f5614a2d93375f9a181240fc31d32a35f834fb8f61d5f76e9"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/System.dll",
+      "sha256": "2d60482f1cf7a1f23a75252b1dd2acaf55ae4137c65436b021314a50c6b63943"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Unity.Addressables.dll",
+      "sha256": "ed4242c0a8461a9f6180ecc9fb9277a8fea2a4e34112af3881bf28f7572b066a"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Unity.Animation.Rigging.DocCodeExamples.dll",
+      "sha256": "7b01c3520089750c900c05a2a42430ce4ecd3638c1c308872d6e1afd2e69455e"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Unity.Animation.Rigging.dll",
+      "sha256": "43537cb5e597e8e17a74a5cf9502d0b2f781d49da6d60c0026047816c80412c7"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Unity.Burst.Unsafe.dll",
+      "sha256": "9d9c1ff52411decbee5d9f0d1cd61ebeaa222077aa77a52101ea3debafae98e2"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Unity.Burst.dll",
+      "sha256": "9ddac697298877fbede566ebcba69c6f07063dbe6eec4ce3debdd6a84389fd23"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Unity.Collections.LowLevel.ILSupport.dll",
+      "sha256": "d39e0793c631bddee6041608a755aafc1e25b124ebf4bf722a5ea500185f0e58"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Unity.Collections.dll",
+      "sha256": "df30d9cd2eb08a4f4f8b654419e325500ae30d2010aead74dbe18addb6ab5663"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Unity.Mathematics.dll",
+      "sha256": "767149477786a6f30556d30f782f4297ac0b1a6002568d2873e3d93c6a2553b6"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Unity.MemoryProfiler.dll",
+      "sha256": "1e286903c59682caeda53b28647456b22a1f9785160f0fcf2a2fc4f73907b744"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Unity.Postprocessing.Runtime.dll",
+      "sha256": "2d95443de2b8647621c3ebf485f27852784d207b55c82384c45856f661bc81ee"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Unity.Profiling.Core.dll",
+      "sha256": "9bf86e771a816ad38fcd1386f1522c2c5753792374c2cac41300c517b0a28187"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Unity.ResourceManager.dll",
+      "sha256": "857735f04ac7b3b0d90a4d7076c1ac2e9c7cb4763373dcf3522a32a69c3b52c5"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Unity.ScriptableBuildPipeline.dll",
+      "sha256": "c55b02a3baa9ea9a96dbd603f5e1f5ef628099b12a6af003e6f03686e1d2ef17"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Unity.TerrainTools.dll",
+      "sha256": "d27abf28f04033f948656d960f70aa7c17ad4b018e654d07f23a0a7892707d5d"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Unity.TextMeshPro.dll",
+      "sha256": "524a901792792911746e7ae35693e80055d200edd9752ce5cc74b06183e56eba"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.AIModule.dll",
+      "sha256": "436644f9a9f4768e1af7fff65abea880fc812481ef822adf1fbebbeedc6ad907"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.AccessibilityModule.dll",
+      "sha256": "258e5a58a21bdf7de07227da1228b3c8c5bcc36fa80f1f479f1bad9c57e4858a"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.AndroidJNIModule.dll",
+      "sha256": "8558107ef109aa9d4c1d70409ac5e9267cbd77645a0b67972738055811dff235"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.AnimationModule.dll",
+      "sha256": "f9a425a255d803ca742d2c8203c576e1e8e9c2cd84ac93d5c47c68e0985480ec"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.AssetBundleModule.dll",
+      "sha256": "4a2e01fc5d6fd79476dbd5077dd62a856880edd80c30ca76ae29a4c8209b0540"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.AudioModule.dll",
+      "sha256": "23603679297d0dceae52bf92d159212721ac3c414003de087b7eaf8cf308b556"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.ClothModule.dll",
+      "sha256": "4f94825dfd17d99c642e44e81adcf741be050910a6fe56e82449c4ee784b9fb6"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.ClusterInputModule.dll",
+      "sha256": "1f20213660c5f876d7cb5943e148132e1307d9fedc69ded4dad34ae50b52f13c"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.ClusterRendererModule.dll",
+      "sha256": "d07b964fb4ef3a57376c8ec9c6cfb78293faa8cbba5ad4294a9e69def476d8c0"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.ContentLoadModule.dll",
+      "sha256": "d107e6a7a0185e06024de95cbdddc7ad758a66443a2cd34388a6c797fcbd897d"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.CoreModule.dll",
+      "sha256": "44d613b2996334c7fc7afadbdd2020d769e70fee1f7e7060db9d51eb5e545e07"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.CrashReportingModule.dll",
+      "sha256": "7335502a07cb5b587becf8e6f70201ad0b087d1594f02da020b41bebba17deae"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.DSPGraphModule.dll",
+      "sha256": "24e9fa116550e315bb2824f54796ea6906ba916d43f835435bf65438773ec630"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.DirectorModule.dll",
+      "sha256": "ddbabcb2fdaa340d53fde8c024e06a2a000f2f2d90c950a82cb5e9aa42a47068"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.GIModule.dll",
+      "sha256": "9703570d65d3172aa905402fadeca880bce0d9f828acd50c5aea06a240105e5a"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.GameCenterModule.dll",
+      "sha256": "3b6149b334ca3f73db3614717ff1e224490c805e63af7c0f84fa9728ca7fdb07"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.GridModule.dll",
+      "sha256": "98f5d803522928bc94f3dd1b18cb7de82471405fa48b2cf558bd7eeb6a831537"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.HotReloadModule.dll",
+      "sha256": "030f75bd4ab90fd3c7bf949b24eb3b9f9b91b63766370675487c7e2d56ab2b93"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.IMGUIModule.dll",
+      "sha256": "6d676cacf828379ede54428494dc6743ec2cef36b728ccde0c514347ce972189"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.ImageConversionModule.dll",
+      "sha256": "5e92af092a382fa4de48635368798912ad5ca38a4a744079442c17c33f32dbaf"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.InputLegacyModule.dll",
+      "sha256": "c13f4843fe67f8a78f27c8185cb9ebac1e377495144a1707c4fc9403734dfee7"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.InputModule.dll",
+      "sha256": "5178a355deb1fb7ec1d0b0d07e4cb16c1a0ae2213c21f87b33cc9dae00e9554c"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.JSONSerializeModule.dll",
+      "sha256": "de4795a2e27d1ad8ec4bab415571f20bf818add7354beca23cd07798a99aee4e"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.LocalizationModule.dll",
+      "sha256": "86935f9854bd9459d3fb23bd565383b8bee3380fff98373ba2002aadf96da44f"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.ParticleSystemModule.dll",
+      "sha256": "50957fc418ea6ec75b9b4f40d6e987aa507d8785830a5a21dc3ecba16f718d1f"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.PerformanceReportingModule.dll",
+      "sha256": "5cf2f99dcc094cd295a4fccf3e7f6524f8677ad0bd6d770fdaee92d302022cff"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.Physics2DModule.dll",
+      "sha256": "d084a2257dba938a67e2137fe392fa4da9249dbbe456d4348caa7280dc59a083"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.PhysicsModule.dll",
+      "sha256": "b751d25946d651012d2f0839af6b6e102f44c3aa15276913a34c63d7df28791a"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.ProfilerModule.dll",
+      "sha256": "e9a55d1a6ac9878ca6374c336fd65dc294437f4f1039e56abe21a950fbc212b9"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.PropertiesModule.dll",
+      "sha256": "8763681ad2c57a6e72268c46360bc3cd5f5dbcb6ec0aa3e68fec5ce0aefae914"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll",
+      "sha256": "a4adeebc59eed78ae00313bfd3ed1aa5373d1a69ef4fa6a03d93473ad157c998"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.ScreenCaptureModule.dll",
+      "sha256": "a1a68a09c6f4d50d5581dd9e4e77188588c44ffaeb69c7b121c6bd2c5e55f486"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.SharedInternalsModule.dll",
+      "sha256": "5998e2afc5aa8e20e39316829b18df329b7a27ca5ffd4e602c456f13de906774"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.SpriteMaskModule.dll",
+      "sha256": "4963e748b69aa75b5812c76a4d411a6aac890410dc4e5331ff2e5851e7933ad3"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.SpriteShapeModule.dll",
+      "sha256": "e7ee0af321047ac552290d4c47a114581810ab1b4bce7517f461d9be5692d6e8"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.StreamingModule.dll",
+      "sha256": "27dda6918487354c0cddd44140ff72eadc4c07dfd57dfc0740fdfd8c2dff83c3"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.SubstanceModule.dll",
+      "sha256": "8b963a8897d650bf9d13234e1421b27e91a996ed4fc0cbf16d3234ce155eb07a"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.SubsystemsModule.dll",
+      "sha256": "7c7ddbc7caf863f658bd8866952e2a0fad1a77f3c7904011ab939b2e6bd687b3"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.TLSModule.dll",
+      "sha256": "231c6c6fc2f38d42bdb4ab09675236395272caf0ece558741eeb5f33979f6766"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.TerrainModule.dll",
+      "sha256": "d58763fefbe594652d71a14c94dafa01790e3c548a7cacef65a57663bbbd46f9"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.TerrainPhysicsModule.dll",
+      "sha256": "cd087e3621d5daa903d8adb9e2b7b93ead2f609018a966782006e1bdd64b228e"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.TextCoreFontEngineModule.dll",
+      "sha256": "4c71d37b3d59d57be67c213aaa15adf287544c52e3e7714456e5ff56135744e5"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.TextCoreTextEngineModule.dll",
+      "sha256": "c901c43a13f33cbd3292e248de70a20f8328043148e94d54f988e22eb38224d2"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.TextRenderingModule.dll",
+      "sha256": "ad92196a2427055694720b64d50b595de689302d81ce94fbae72ca62fba53af0"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.TilemapModule.dll",
+      "sha256": "8e0a5252365336d887619be082785ca5089af4a79fb782cc453b9d3dff3df26e"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.UI.dll",
+      "sha256": "8d03bb4952da40781a1b103bb6ab6a84ca845453fdf174d00dcd5efb0a0b43a2"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.UIElementsModule.dll",
+      "sha256": "01630a3b11c901a3bb406be1abe732754fae6a8699220f7b28935394c99c5f09"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.UIModule.dll",
+      "sha256": "9d7a87544ba02ce15e145e23038eab78a52253867dfaae6b90df2e9c05cc476e"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.UmbraModule.dll",
+      "sha256": "eb9eda25cb2264c4369fae4c4f2c68097d1b7df8a6e8dff8a73ef595a601baba"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.UnityAnalyticsCommonModule.dll",
+      "sha256": "2f7d95eda482665175329b15235018f7275e6d7add8e96257197c8267c1be4f2"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.UnityAnalyticsModule.dll",
+      "sha256": "4c5feb1b0aa87c00f5d5ab770dad8bf7be1090141a0ee5e5a5525c8030b207c4"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.UnityConnectModule.dll",
+      "sha256": "05957877318fbd1367d414698bb3d0a53c80a587a918abdaba096645b3c5142b"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.UnityCurlModule.dll",
+      "sha256": "0fb91f98072a141a65c374105e26fb4778747d8ac54bca207a950fccfd5cac54"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.UnityTestProtocolModule.dll",
+      "sha256": "341ace435326f810e8cbea225e194bff5e16ba2dfc79de8c95d82f63fc6c16e0"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.UnityWebRequestAssetBundleModule.dll",
+      "sha256": "4b927daa140f4a3ae143d2475deda795da0a62c7ce5e212cdfa470940d7547e5"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll",
+      "sha256": "f9244788f8f0e60262f1f159043ce468d535bf4b713908d3173360be2782edb3"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.UnityWebRequestModule.dll",
+      "sha256": "61c5d06e129bcbf066b5ed9d6d5ee2e852108460ad10e5cbfcfa33af061cc66f"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll",
+      "sha256": "c6b9e39f9ee2a35aa1e34b4fefc2ff84e8e202e76a73760792064c31d106637d"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll",
+      "sha256": "7494a5d474c2697fe59e860091f2796388b0d1066daa9ef78aae97e8039b7030"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.VFXModule.dll",
+      "sha256": "c2f5ff923b736c7e5a1a43365baa7b8a8169b022ea3b8b4950ab3a856a9dba99"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.VRModule.dll",
+      "sha256": "a4116fe6ccb056d98bb499682f0776dc4d572db48093b648aabc111666af0bbf"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.VehiclesModule.dll",
+      "sha256": "08c5844d506bc3c716af74b8de5f1516a87f6d0cf05ad8abae71a77930656442"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.VideoModule.dll",
+      "sha256": "3a746352f34e4555c4846ec7eeeb5ca0edb58cce81f8830c134b7cab6cf6257d"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.VirtualTexturingModule.dll",
+      "sha256": "3d5e11149bf187cf85dabbf1620484657484d40c3f40bd428f0db772d737dcfd"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.WindModule.dll",
+      "sha256": "56033c4b6e17433c880bdcbf4a13a7e4010a6589401bfd5a619471db5088af79"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.XRModule.dll",
+      "sha256": "9d92202330d52e752647113a995c2edafe0308ada84bb4ecb6718e58fd7cb4c3"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/UnityEngine.dll",
+      "sha256": "c8c7fcb038611eeb6b6293601d1fffef72bffebc317256f16cfbc33a333b10fa"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/Utf8Json.dll",
+      "sha256": "448c4b8990745aff95a71b2443751ab082e59fe3a89e27e4a510b624c6a89b87"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/XblPCSandbox.dll",
+      "sha256": "0333462514acbd6c1880ff004ec71bd7c08427c79384f7e9e339b9e10ee563ef"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/com.rlabrecque.steamworks.net.dll",
+      "sha256": "bb1b891f8a7e3a1fac4d56dfeb351f8f263ce8f9856de1626f93a419c8446872"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/com.thenakeddev.dlss.Runtime.dll",
+      "sha256": "e23823372b4ffb90dbb6059253a1403f11d7452267ad1905965293918c7da5ca"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/com.thenakeddev.fsr.Runtime.BIRP.dll",
+      "sha256": "a90bd1726633ab1c675f4947cb60e562cea13fe4a749dbca8166dad9ebc95a6a"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/com.thenakeddev.fsr.Runtime.dll",
+      "sha256": "3a348fe42e69f8b7232f28df01d0b8bf96c6b65fe44e80719c0e0f5efd108cae"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/enum2int.dll",
+      "sha256": "5b272c79e6d8df2aa03d7adf8eeb2d51b3c072f74528110fd3562eae491739dd"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/mscorlib.dll",
+      "sha256": "44670e7fd323ad5e4ec0fd0614e73e685e0a546aa59b9b9112f09e381689df79"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/netstandard.dll",
+      "sha256": "bf0b7eac9010b75413e4ec1a07a3453bc6a68eeb8e916fbed7c1f2777841f7c7"
+    },
+    {
+      "path": "7DaysToDieServer_Data/Managed/zxing.unity.dll",
+      "sha256": "b508b814a1cf11ecbf7ffaed4a3ed92db68e011688e2bcfaaa6a440ab4c170e8"
+    },
+    {
+      "path": "Mods/0_TFP_Harmony/0Harmony.dll",
+      "sha256": "c349e1a3fd13fa5a9facc9805a5e160161b14489f46f6bdd38202b8e124f78df"
+    },
+    {
+      "path": "Mods/0_TFP_Harmony/ModInfo.xml",
+      "sha256": "56c9579d19ada8f739b563445236c71d1fa3804ae5a28128eabfdf84f1cb2360"
+    },
+    {
+      "path": "Mods/0_TFP_Harmony/Mono.Cecil.Mdb.dll",
+      "sha256": "d65e445a02dc2d2a189d19745f14368c6a24d05914e36bbc7ed9732962998ea5"
+    },
+    {
+      "path": "Mods/0_TFP_Harmony/Mono.Cecil.Pdb.dll",
+      "sha256": "8e221211df8a917d69145239b71b71c87e61761fb0c96d5e997964c172dda4c0"
+    },
+    {
+      "path": "Mods/0_TFP_Harmony/Mono.Cecil.Rocks.dll",
+      "sha256": "9db3edaa8bc6ccd7ac6e2517c743591658bd6bdd436a146e0eda101d30a1332e"
+    },
+    {
+      "path": "Mods/0_TFP_Harmony/Mono.Cecil.dll",
+      "sha256": "71c8b01208ab37a5164f5bacd69054899db9fc00f2da87dbd07dc1ee40fc06a8"
+    },
+    {
+      "path": "Mods/0_TFP_Harmony/MonoMod.Backports.dll",
+      "sha256": "6db3486eb3bfc458c770d61a1391569000cd871dcc7160fb3da2cbfe8d98601a"
+    },
+    {
+      "path": "Mods/0_TFP_Harmony/MonoMod.Core.dll",
+      "sha256": "76e100a660669362710ad611752d0b7be4d57f502d547d07d8bb7c2cd30ef79d"
+    },
+    {
+      "path": "Mods/0_TFP_Harmony/MonoMod.ILHelpers.dll",
+      "sha256": "20df341949b81662e09787e42b66ac3fea601d4cf4b717294f2d72a80860e4ec"
+    },
+    {
+      "path": "Mods/0_TFP_Harmony/MonoMod.Iced.dll",
+      "sha256": "1821372dbf5ba5cc6fd7bf8416846c02cba97ae26d7b130ce921e2bc8ef9156b"
+    },
+    {
+      "path": "Mods/0_TFP_Harmony/MonoMod.RuntimeDetour.dll",
+      "sha256": "98a99a3cc37e90fddcacdd88ba64c39cb0eb84119ccf820f4c4f29e9660f276a"
+    },
+    {
+      "path": "Mods/0_TFP_Harmony/MonoMod.Utils.dll",
+      "sha256": "cccae0c3033f34205df9466725df7522422f797a60c996b2a5811885fdbb2cf6"
+    },
+    {
+      "path": "Mods/0_TFP_Harmony/System.ValueTuple.dll",
+      "sha256": "f341fdcd30bfe1615b8cdcb0da0fb8c60dfae0b7aaf9238fe1cd5b721df16eb1"
+    },
+    {
+      "path": "Mods/0_TFP_Harmony/TfpHarmony.dll",
+      "sha256": "71d78b990a29ecc0e0c575227e7933e2bfedca802108d8a30e8d9eb91cec1ac8"
+    }
+  ]
+}

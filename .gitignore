@@ -6,4 +6,6 @@
 *.user
 *.suo
 local-dependencies/
+artifacts/
+**/__pycache__/
 # Preserve the original supplied reference binary.
