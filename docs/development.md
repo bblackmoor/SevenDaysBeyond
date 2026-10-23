@@ -61,6 +61,8 @@ The tests exercise actual metadata, all hook signatures, missing dependencies, w
 
 ## First in-game verification
 
+The native baseline installation on ANNWN is documented in [annwn-server.md](annwn-server.md). Its single-world server startup has succeeded; a client join and the modded two-world checks below remain pending.
+
 Use a separate test server and two disposable map saves with MultiWorld's normal runtime configuration. Keep its existing client/server installation requirements. Add the built `SevenDaysBeyond` directory to the test server's `Mods` directory.
 
 1. Start the server and check for `UPSTREAM_CONTRACT_OK hooks=12` in its log. A failure logs the reason; the companion installs no patches.
