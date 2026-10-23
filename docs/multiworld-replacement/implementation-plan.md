@@ -149,9 +149,9 @@ Those are tests of the upstream-based prototype. They do not prove the independe
 
 ## Repository removal checklist
 
-Documenting the mod and removing stored third-party material are separate from removing the live runtime dependency. The bundled reference directory has now been removed; see [removal notes](removal-notes.md). No history rewrite, runtime replacement, deployment or ANNWN restart was performed.
+Documenting the mod and removing stored third-party material are separate from removing the live runtime dependency. The bundled reference directory has now been removed; see [removal notes](removal-notes.md). A later [history cleanup](history-cleanup.md) filters the reference directory from the reachable branch history. No runtime replacement, deployment or ANNWN restart was performed.
 
-When removing stored material, retain this directory, its provenance hashes and our own project code; remove the archive, extracted DLL, reconstructed code, IL, decompilation script/project and obsolete research outputs from `resources/multiworld/` as appropriate. Update README/layout links and any tooling that assumes those paths. A normal deletion affects the branch tip; older commits still contain the material. History cleanup, if required, is a separate coordinated operation and is not performed here.
+When removing stored material, retain this directory, its provenance hashes and our own project code; remove the archive, extracted DLL, reconstructed code, IL, decompilation script/project and obsolete research outputs from `resources/multiworld/` as appropriate. Update README/layout links and any tooling that assumes those paths. A normal deletion alone affects the branch tip. The subsequent [history cleanup](history-cleanup.md) also filters the historical snapshots; original commit identifiers in the inspection ledger are retained only as provenance.
 
 If runtime use must also end, complete at least stages A–G before switching ANNWN. Remove upstream discovery/reflection/contracts from our code and dependency tools, update deploy/package documentation and prerequisites, and verify builds/tests using an environment with no upstream archive/DLL/source available. Preserve existing native saves, shared characters, preferences, allies, calendar and quest books for explicit migration; deleting reference materials must not delete player data.
 

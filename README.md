@@ -31,7 +31,7 @@ Current gameplay settings are documented in [ANNWN sandbox settings](docs/annwn-
 
 ## Independent Multiworld replacement
 
-[Multiworld replacement specification](docs/multiworld-replacement/README.md) documents the inspected 0.6.2 architecture, transfer/network/storage contracts, current companion dependencies, implementation stages and acceptance tests. Its evidence inventory covers 119 Harmony patch declarations and 176 top-level static methods. The bundled third-party archive, DLL, decompiled source and IL have now been removed from the current branch. These notes remain available independently. The current companion still requires a separately installed Multiworld runtime; an independent replacement has not yet been implemented. See [removal notes](docs/multiworld-replacement/removal-notes.md).
+[Multiworld replacement specification](docs/multiworld-replacement/README.md) documents the inspected 0.6.2 architecture, transfer/network/storage contracts, current companion dependencies, implementation stages and acceptance tests. Its evidence inventory covers 119 Harmony patch declarations and 176 top-level static methods. The bundled third-party archive, DLL, decompiled source and IL have now been removed from the current branch. These notes remain available independently. The current companion still requires a separately installed Multiworld runtime; an independent replacement has not yet been implemented. See [removal notes](docs/multiworld-replacement/removal-notes.md) and the subsequent [history cleanup](docs/multiworld-replacement/history-cleanup.md).
 
 ## Feature backlog
 

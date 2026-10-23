@@ -4,7 +4,8 @@
 
 - Remove bundled LITW MultiWorld archive, DLL, decompiled C#, IL and reference scripts from the current branch after preserving the replacement analysis and final dependency notes.
 - Accept the current companion’s external DLL through `--upstream`, `MULTIWORLD_DLL`, or ignored `local-dependencies/multiworld/`; explicitly skip upstream metadata integration tests when that fixture is absent.
-- Keep independent replacement documentation and existing companion/gameplay code. The deployed runtime and Git history are unchanged.
+- Keep independent replacement documentation and existing companion/gameplay code. The deployed runtime is unchanged.
+- Rewrite the branch history to remove the entire Multiworld reference directory from every snapshot, preserving original messages and author/date provenance in commit trailers. Verify all remaining file objects before replacing the branch.
 
 ## 0.6.0
 

@@ -48,6 +48,6 @@ Existing SevenDaysBeyond 0.6.0 ZIP packaging permits only our DLL, ModInfo and C
 
 ## Removal boundary
 
-This is a normal commit deleting material from the current branch. Older Git commits still contain it; no history rewrite or release/tag deletion is performed. ANNWN's installed files, live service, player data and backups are unchanged. No claim is made that the live companion can run without Multiworld.
+The initial removal was a normal deletion commit. The repository history was subsequently rewritten to exclude `resources/multiworld/` from every reachable snapshot; see [history cleanup](history-cleanup.md). ANNWN’s installed files, live service, player data and backups are unchanged. No claim is made that the live companion can run without Multiworld.
 
 When replacing the runtime later, update the backend, tools, deployment helpers and package prerequisites together, and use the migration/acceptance gates in the implementation plan. Do not delete save data when removing source references.
