@@ -13,7 +13,7 @@ namespace SevenDaysBeyond
         private static int stage;
         private static float deadline;
         private static object[] contexts;
-        private static readonly Rigidbody[] bodies = new Rigidbody[2];
+        private static Rigidbody[] bodies = new Rigidbody[0];
         private static Vector3[] positions;
         private static ulong[] clocks, ticks;
         private static long[] frames, physics;
@@ -27,10 +27,11 @@ namespace SevenDaysBeyond
             { Log.Out("[SevenDaysBeyond] SUSPENSION_SELF_TEST_CANCELLED client joined; fixtures removed."); Cleanup(); return; }
             if(!started)
             {
-                contexts=new[] {MultiWorldBridge.Find("West"),MultiWorldBridge.Find("East")};
+                contexts=new[]{MultiWorldBridge.Find("West")}.Concat(MultiWorldBridge.AllContexts().Where(c=>MultiWorldBridge.Name(c)!="West" && MultiWorldBridge.Available(c))).ToArray();
                 if(contexts.Any(c=>c==null || WorldSuspension.Get(c)==null || !WorldSuspension.Get(c).Sleeping)) return;
                 started=true;
-                for(int i=0;i<2;i++)
+                bodies=new Rigidbody[contexts.Length];
+                for(int i=0;i<contexts.Length;i++)
                 {
                     var go=new GameObject("SDB suspension test "+i);
                     SceneManager.MoveGameObjectToScene(go,MultiWorldBridge.Scene(contexts[i]));
@@ -39,13 +40,13 @@ namespace SevenDaysBeyond
                     bodies[i].useGravity=true;
                 }
                 Capture(); deadline=Time.realtimeSinceStartup+2; stage=1;
-                Log.Out("[SevenDaysBeyond] SUSPENSION_SELF_TEST_BEGIN two empty worlds; isolated unsaved rigid bodies.");
+                Log.Out("[SevenDaysBeyond] SUSPENSION_SELF_TEST_BEGIN worlds="+contexts.Length+"; isolated unsaved rigid bodies.");
                 return;
             }
             if(Time.realtimeSinceStartup<deadline) return;
             if(stage==1)
             {
-                AssertFrozen(0); AssertFrozen(1);
+                for(int i=0;i<contexts.Length;i++) AssertFrozen(i);
                 if(WorldSuspension.GlobalTaskPumps<=pumps) throw new InvalidOperationException("Global task pump stopped while all worlds slept.");
                 Log.Out("[SevenDaysBeyond] SUSPENSION_ALL_EMPTY_PASS stable clocks, core/physics counts and rigid bodies; global tasks continued.");
                 WorldSuspension.TestReservations.Add(contexts[0]);
@@ -56,8 +57,8 @@ namespace SevenDaysBeyond
                 var s=WorldSuspension.Get(contexts[0]);
                 if(s.Sleeping || s.Frames<=frames[0] || s.Physics<=physics[0] || bodies[0].position.y>=positions[0].y-0.5f)
                     throw new InvalidOperationException("Reserved destination failed to resume core and physics.");
-                AssertFrozen(1);
-                Log.Out("[SevenDaysBeyond] SUSPENSION_RESERVATION_WAKE_PASS West core/physics resumed; East remained frozen.");
+                for(int i=1;i<contexts.Length;i++) AssertFrozen(i);
+                Log.Out("[SevenDaysBeyond] SUSPENSION_RESERVATION_WAKE_PASS West core/physics resumed; all other worlds remained frozen.");
                 WorldSuspension.TestReservations.Remove(contexts[0]);
                 deadline=Time.realtimeSinceStartup+SuspensionPolicy.GraceSeconds+1; stage=3;
             }
@@ -68,7 +69,7 @@ namespace SevenDaysBeyond
             }
             else
             {
-                AssertFrozen(0); AssertFrozen(1);
+                for(int i=0;i<contexts.Length;i++) AssertFrozen(i);
                 Log.Out("[SevenDaysBeyond] SUSPENSION_SELF_TEST_PASS all-empty freeze, live global tasks, independent reservation wake, and release/refreeze; fixtures removed.");
                 Cleanup();
             }

@@ -58,6 +58,9 @@ namespace SevenDaysBeyond
             if (config.DocumentElement.Name != "SevenDaysBeyond" || config.DocumentElement.GetAttribute("phase2") != "true") return;
             allowApproach = config.DocumentElement.GetAttribute("allowApproachCommand") == "true";
             MultiWorldBridge.Bind(upstream);
+            var cells=config.DocumentElement.SelectNodes("Grid/Cell");
+            if(cells.Count>0)
+                BorderPolicy.Grid=new GridLayout(cells.Cast<XmlElement>().Select(c=>new GridCell(c.GetAttribute("name"),int.Parse(c.GetAttribute("x"),CultureInfo.InvariantCulture),int.Parse(c.GetAttribute("z"),CultureInfo.InvariantCulture))));
             harmony = new Harmony(HarmonyId);
             try
             {
@@ -69,8 +72,9 @@ namespace SevenDaysBeyond
                     WorldSuspension.Install(upstream, config.DocumentElement.GetAttribute("suspensionSelfTest") == "true");
                 if (config.DocumentElement.GetAttribute("sharedClock") == "true")
                     SharedClock.Configure(config.DocumentElement.GetAttribute("clockSelfTest") == "true");
+                if (config.DocumentElement.GetAttribute("questBook") == "true") QuestBook.Configure();
                 enabled = true;
-                Log.Out("[SevenDaysBeyond] BORDER_TRAVEL_ENABLED West/east <-> East/west; warnings=50m/10m before travel line; trigger=500m; arrival=600m; on-foot only; approachCommand=" + allowApproach);
+                Log.Out("[SevenDaysBeyond] BORDER_TRAVEL_ENABLED gridCells="+BorderPolicy.Grid.Cells.Length+"; warnings=50m/10m before travel line; trigger=500m; arrival=600m; on-foot only; approachCommand=" + allowApproach);
             }
             catch { harmony.UnpatchSelf(); throw; }
         }
@@ -111,8 +115,8 @@ namespace SevenDaysBeyond
             try
             {
                 // Validate both routes before monitoring any player.
-                if (!MultiWorldBridge.Available(MultiWorldBridge.Find("West")) || !MultiWorldBridge.Available(MultiWorldBridge.Find("East"))) return;
-                Bounds(MultiWorldBridge.Find("West")); Bounds(MultiWorldBridge.Find("East"));
+                if (BorderPolicy.Grid.Cells.Any(cell=>!MultiWorldBridge.Available(MultiWorldBridge.Find(cell.Name)))) return;
+                foreach(GridCell cell in BorderPolicy.Grid.Cells) Bounds(MultiWorldBridge.Find(cell.Name));
                 ProbeLanding();
                 ClientInfo[] clients = SingletonMonoBehaviour<ConnectionManager>.Instance.Clients.List.ToArray();
                 foreach (ClientInfo gone in states.Keys.Where(c => !clients.Contains(c)).ToArray())
@@ -125,7 +129,7 @@ namespace SevenDaysBeyond
                     if (state.Pending != null) { TickJob(state); continue; }
                     if (MultiWorldBridge.Transfer(c) != null) continue;
                     object context = MultiWorldBridge.Resolve(c);
-                    if (!MultiWorldBridge.Available(context) || (MultiWorldBridge.Name(context) != "West" && MultiWorldBridge.Name(context) != "East")) continue;
+                    if (!MultiWorldBridge.Available(context) || !BorderPolicy.Grid.Cells.Any(cell=>cell.Name==MultiWorldBridge.Name(context))) continue;
                     if (state.Context != context) { state.Context = context; state.HasSafe = false; state.WarnAt = 0; state.WarningLevel = 0; }
                     var w = MultiWorldBridge.World(context);
                     using (MultiWorldBridge.Scope(context))
@@ -165,7 +169,7 @@ namespace SevenDaysBeyond
                         if (!MultiWorldBridge.Available(target)) { Say(c, "Destination unavailable. You remain in this world."); state.Cooldown = Time.realtimeSinceStartup + 10; continue; }
                         MapBounds tb = Bounds(target);
                         float tx, tz;
-                        BorderPolicy.ArrivalPoint(b, tb, edge, p.position.z, out tx, out tz);
+                        BorderPolicy.ArrivalPoint(b, tb, edge, p.position.x, p.position.z, out tx, out tz);
                         Begin(c, state, context, target, tb, new Vector3(tx, 80, tz), p.position, false);
                     }
                 }
@@ -177,7 +181,7 @@ namespace SevenDaysBeyond
             if (!probesStarted)
             {
                 probesStarted = true;
-                foreach (string name in new[] { "West", "East" })
+                foreach (string name in BorderPolicy.Grid.Cells.Select(c=>c.Name))
                 {
                     object context = MultiWorldBridge.Find(name);
                     MapBounds b = Bounds(context);
@@ -266,7 +270,9 @@ namespace SevenDaysBeyond
             if (job.Approach)
             {
                 using (MultiWorldBridge.Scope(job.Source)) Teleport(job.Client, p, job.Point);
-                Say(job.Client, "At the test approach. Walk " + (MultiWorldBridge.Name(job.Source) == "West" ? "east" : "west") + " to cross automatically.");
+                float remaining;
+                BorderEdge approachEdge=BorderPolicy.Nearest(job.Bounds,job.Point.x,job.Point.z,out remaining);
+                Say(job.Client, "At the test approach. Walk " + approachEdge.ToString().ToLowerInvariant() + " toward the travel line.");
                 Log.Out("[SevenDaysBeyond] BORDER_TEST_APPROACH " + MultiWorldBridge.Name(job.Source) + " point=" + job.Point);
                 state.Cooldown = Time.realtimeSinceStartup + 3;
                 Cleanup(state); return;
@@ -331,7 +337,7 @@ namespace SevenDaysBeyond
         private static ModEvents.EModEventResult OnChat(ref ModEvents.SChatMessageData data)
         {
             string message = (data.Message ?? "").Trim().ToLowerInvariant();
-            if (message != "/sdb status" && message != "/sdb approach" && message != "/sdb time") return (ModEvents.EModEventResult)0;
+            if (message != "/sdb status" && message != "/sdb approach" && !message.StartsWith("/sdb approach ",StringComparison.Ordinal) && message != "/sdb time" && message != "/sdb map") return (ModEvents.EModEventResult)0;
             ClientInfo c = data.ClientInfo;
             if (!enabled || failed || !MultiWorldBridge.Ready || c == null || !c.loginDone) return (ModEvents.EModEventResult)2;
             try
@@ -344,6 +350,9 @@ namespace SevenDaysBeyond
                     if (p == null || p.IsDead()) return (ModEvents.EModEventResult)2;
                     MapBounds b = Bounds(context);
                     if (message == "/sdb time") SharedClock.Report(c);
+                    else if(message == "/sdb map")
+                        foreach(GridCell cell in BorderPolicy.Grid.Cells.OrderByDescending(v=>v.Z).ThenBy(v=>v.X))
+                            Say(c,cell.Name+" ("+cell.X+","+cell.Z+"): "+string.Join(", ",Enum.GetValues(typeof(BorderEdge)).Cast<BorderEdge>().Where(e=>BorderPolicy.Destination(cell.Name,e)!=null).Select(e=>e+" -> "+BorderPolicy.Destination(cell.Name,e))));
                     else if (message == "/sdb status")
                     {
                         float distance;
@@ -363,8 +372,19 @@ namespace SevenDaysBeyond
                         else if (Time.realtimeSinceStartup < state.Cooldown) Say(c, "Please wait a few seconds before the next test approach.");
                         else
                         {
-                            float x = MultiWorldBridge.Name(context) == "West" ? b.MaxX - 560 : b.MinX + 560;
+                            BorderEdge edge=BorderPolicy.Grid.FirstExit(MultiWorldBridge.Name(context));
+                            if(message.StartsWith("/sdb approach ",StringComparison.Ordinal))
+                            {
+                                string direction=message.Substring("/sdb approach ".Length);
+                                if(!new[]{"east","west","north","south"}.Contains(direction.ToLowerInvariant()) || !Enum.TryParse(direction,true,out edge))
+                                { Say(c,"Use /sdb approach east, west, north or south."); return (ModEvents.EModEventResult)2; }
+                            }
+                            float x = BorderPolicy.Clamp(p.position.x,b.MinX+BorderPolicy.Arrival,b.MaxX-BorderPolicy.Arrival);
                             float z = BorderPolicy.Clamp(p.position.z, b.MinZ + BorderPolicy.Arrival, b.MaxZ - BorderPolicy.Arrival);
+                            if(edge==BorderEdge.East) x=b.MaxX-560;
+                            else if(edge==BorderEdge.West) x=b.MinX+560;
+                            else if(edge==BorderEdge.North) z=b.MaxZ-560;
+                            else z=b.MinZ+560;
                             Begin(c, state, context, context, b, new Vector3(x, 80, z), p.position, true);
                         }
                     }

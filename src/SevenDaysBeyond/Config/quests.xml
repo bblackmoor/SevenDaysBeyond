@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configs>
+  <append xpath="/quests">
+    <quest id="sdb_test_fieldwork">
+      <property name="name" value="SDB Test: Three Zombies" />
+      <property name="description" value="Quest persistence test. Kill one zombie, cross to another map, then return and finish the remaining two. This quest belongs to the map where you accepted it. No rewards." />
+      <property name="icon" value="ui_game_symbol_zombie" />
+      <property name="repeatable" value="true" />
+      <property name="shareable" value="false" />
+      <property name="completiontype" value="AutoComplete" />
+      <property name="difficulty" value="easy" />
+      <property name="login_rally_reset" value="false" />
+      <property name="return_to_quest_giver" value="false" />
+      <property name="add_to_tier_complete" value="false" />
+      <objective type="EntityKill" id="zombie" value="3" phase="1">
+        <property name="target_tags" value="zombie" />
+      </objective>
+    </quest>
+  </append>
+</configs>

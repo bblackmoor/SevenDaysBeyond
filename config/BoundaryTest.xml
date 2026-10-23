@@ -1,3 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Disposable West/East server only. Omit this file to disable border travel. -->
-<SevenDaysBeyond phase2="true" allowApproachCommand="true" freezeEmptyWorlds="true" suspensionSelfTest="true" sharedClock="true" clockSelfTest="true" />
+<?xml version='1.0' encoding='utf-8'?>
+<SevenDaysBeyond phase2="true" allowApproachCommand="true" freezeEmptyWorlds="true" suspensionSelfTest="true" sharedClock="true" clockSelfTest="true" questBook="true">
+  <Grid>
+    <Cell name="West" x="0" z="0" />
+    <Cell name="East" x="1" z="0" />
+    <Cell name="NorthWest" x="0" z="1" />
+    <Cell name="NorthEast" x="1" z="1" />
+  </Grid>
+</SevenDaysBeyond>

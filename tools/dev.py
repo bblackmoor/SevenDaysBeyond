@@ -133,6 +133,7 @@ def main():
                     sorted((ROOT / "src/SevenDaysBeyond").rglob("*.cs")) + [ROOT / "src/Shared/MultiWorldContract.cs"],
                     [Path(p) for p in report["CompilerReferences"]], output)
     shutil.copy2(ROOT / "src/SevenDaysBeyond/ModInfo.xml", output.parent / "ModInfo.xml")
+    shutil.copytree(ROOT / "src/SevenDaysBeyond/Config", output.parent / "Config", dirs_exist_ok=True)
     report["ModBuildSucceeded"] = True
     report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print("Travel mod built: " + str(output.parent))

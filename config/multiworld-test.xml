@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <LITWMultiWorld defaultWorld="West" schemaVersion="1" mode="runtime" storageId="SevenDaysBeyond_Test">
   <property name="Firstjoinplayer" value="West" />
   <property name="FastWorldSwitch" value="true" />
@@ -16,6 +16,20 @@
     <property name="WorldGenSeed" value="SDB_East" />
     <property name="WorldGenSize" value="6144" />
     <property name="GameName" value="SDB_Test_East" />
+    <property name="GameMode" value="GameModeSurvival" />
+  </World>
+  <World id="3" name="NorthWest">
+    <property name="GameWorld" value="Pregen06k02" />
+    <property name="WorldGenSeed" value="SDB_NorthWest" />
+    <property name="WorldGenSize" value="6144" />
+    <property name="GameName" value="SDB_Test_NorthWest" />
+    <property name="GameMode" value="GameModeSurvival" />
+  </World>
+  <World id="4" name="NorthEast">
+    <property name="GameWorld" value="Pregen08k01" />
+    <property name="WorldGenSeed" value="SDB_NorthEast" />
+    <property name="WorldGenSize" value="8192" />
+    <property name="GameName" value="SDB_Test_NorthEast" />
     <property name="GameMode" value="GameModeSurvival" />
   </World>
 </LITWMultiWorld>

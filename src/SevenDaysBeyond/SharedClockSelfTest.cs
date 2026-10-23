@@ -24,7 +24,7 @@ namespace SevenDaysBeyond
             if(stage==0)
             {
                 if(SuspensionSelfTest.Running) return;
-                contexts=new[]{MultiWorldBridge.Find("West"),MultiWorldBridge.Find("East")};
+                contexts=MultiWorldBridge.AllContexts().Where(MultiWorldBridge.Available).ToArray();
                 if(contexts.Any(c=>WorldSuspension.Get(c)==null || !WorldSuspension.Get(c).Sleeping)) return;
                 frames=contexts.Select(c=>WorldSuspension.Get(c).Frames).ToArray();
                 physics=contexts.Select(c=>WorldSuspension.Get(c).Physics).ToArray();
@@ -42,7 +42,7 @@ namespace SevenDaysBeyond
                 SharedClock.TestRunning=false;
                 if(SharedClock.Now<=start || !SharedClock.Expired(start+1)) throw new InvalidOperationException("Shared calendar failed to advance independently.");
                 CheckPackets(); SharedClock.SaveAndVerify();
-                Log.Out("[SevenDaysBeyond] SHARED_CLOCK_ADVANCE_PASS calendar="+start+" -> "+SharedClock.Now+"; both simulation clocks and physics remained frozen; matching packet time; persistence roundtrip.");
+                Log.Out("[SevenDaysBeyond] SHARED_CLOCK_ADVANCE_PASS calendar="+start+" -> "+SharedClock.Now+"; all simulation clocks and physics remained frozen; matching packet time; persistence roundtrip.");
                 start=SharedClock.Now; deadline=Time.realtimeSinceStartup+2; stage=2;
             }
             else

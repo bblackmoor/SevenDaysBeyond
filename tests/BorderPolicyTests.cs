@@ -65,6 +65,30 @@ internal static class BorderPolicyTests
         Check(!SuspensionPolicy.MustRun(0,false,false,false,1000,100),"long idle stays asleep");
         Check(SuspensionPolicy.MustRun(0,false,true,false,1000,100),"new reservation wakes long-idle world");
         Check(SuspensionPolicy.MustRun(0,false,false,false,100,100),"release starts fresh grace");
+        BorderPolicy.Grid=new GridLayout(new[]{new GridCell("West",0,0),new GridCell("East",1,0),new GridCell("NorthWest",0,1),new GridCell("NorthEast",1,1)});
+        Check(BorderPolicy.Destination("West",BorderEdge.North)=="NorthWest","north link");
+        Check(BorderPolicy.Destination("NorthWest",BorderEdge.South)=="West","south inverse");
+        Check(BorderPolicy.Destination("East",BorderEdge.North)=="NorthEast","east column north link");
+        Check(BorderPolicy.Destination("NorthEast",BorderEdge.West)=="NorthWest","upper row west link");
+        Check(BorderPolicy.Destination("NorthWest",BorderEdge.North)==null,"outer north closed");
+        Check(BorderPolicy.Destination("West",BorderEdge.South)==null,"outer south closed");
+        foreach(BorderEdge edge in Enum.GetValues(typeof(BorderEdge)))
+        for(int coordinate=-4000;coordinate<=4000;coordinate+=17)
+        {
+            BorderPolicy.ArrivalPoint(b,larger,edge,coordinate,coordinate,out x,out z);
+            BorderPolicy.Nearest(larger,x,z,out d);
+            Check(d>=BorderPolicy.Arrival,"all four arrival edges stay clear of corners");
+            if(edge==BorderEdge.North) Near(z,larger.MinZ+BorderPolicy.Arrival,"north enters south");
+            if(edge==BorderEdge.South) Near(z,larger.MaxZ-BorderPolicy.Arrival,"south enters north");
+        }
+        BorderPolicy.ArrivalPoint(b,larger,BorderEdge.North,1536,0,out x,out z);
+        Near(x,2048,"north preserves longitude proportionally");
+        bool duplicateRejected=false;
+        try { new GridLayout(new[]{new GridCell("A",0,0),new GridCell("B",0,0)}); } catch(ArgumentException) {duplicateRejected=true;}
+        Check(duplicateRejected,"overlapping grid cells rejected");
+        duplicateRejected=false;
+        try { new GridLayout(new[]{new GridCell("A",0,0),new GridCell("a",1,0)}); } catch(ArgumentException) {duplicateRejected=true;}
+        Check(duplicateRejected,"ambiguous case-only map labels rejected");
         Console.WriteLine("Border policy and landing rules: PASS ("+assertions+" assertions)");
     }
 }
