@@ -15,7 +15,8 @@ parser.add_argument('--sha256', required=True)
 args = parser.parse_args()
 root = Path('/srv/seven-days-beyond')
 state = subprocess.check_output(['systemctl','show','seven-days-beyond.service','-p','ActiveState','--value'],text=True).strip()
-if state != 'inactive':
+pid = subprocess.check_output(['systemctl','show','seven-days-beyond.service','-p','MainPID','--value'],text=True).strip()
+if state not in ('inactive','failed') or pid != '0':
     raise SystemExit('Stop seven-days-beyond.service cleanly first.')
 package = args.package.read_bytes()
 if hashlib.sha256(package).hexdigest() != args.sha256:
@@ -28,7 +29,7 @@ with zipfile.ZipFile(args.package) as archive:
     if set(archive.namelist()) != expected or any(i.file_size > 1024*1024 for i in archive.infolist()):
         raise SystemExit('Unexpected package contents.')
     stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
-    backup = root / ('backups/before-border-travel-' + stamp + '.tar.gz')
+    backup = root / ('backups/before-companion-update-' + stamp + '.tar.gz')
     with tarfile.open(backup, 'x:gz') as output:
         for name in ['data-multiworld','config','server/Mods/SevenDaysBeyond','logs/multiworld.log']:
             output.add(root/name,arcname=name)

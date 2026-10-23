@@ -9,7 +9,7 @@ The active `seven-days-beyond.service` now uses:
 - Server configuration: `/srv/seven-days-beyond/config/multiworld.xml`
 - Separate user data: `/srv/seven-days-beyond/data-multiworld`
 - Log: `/srv/seven-days-beyond/logs/multiworld.log`
-- Unmodified LITW MultiWorld 0.6.2 and SevenDaysBeyond 0.2.0 border companion in the server's `Mods` directory
+- Unmodified LITW MultiWorld 0.6.2 and SevenDaysBeyond 0.3.0 border/suspension companion in the server's `Mods` directory
 
 | World command | Map | Disposable save |
 | --- | --- | --- |
@@ -41,7 +41,7 @@ The private client test ZIP contains the unmodified upstream DLL, its ModInfo, t
 6. After at least ten seconds, enter `/world West`. Confirm inventory, character progression, and the saved West location.
 7. Disconnect normally, reconnect, and check inventory and world selection. Tell the assistant when ready for a controlled server restart and another check.
 
-The user confirmed repeated manual transfers, inventory preservation, return locations, reconnect persistence, and controlled server-restart persistence. Automatic on-foot travel is now installed for the next client test; follow [Phase 2 instructions](phase-2.md). The upstream mod still blocks mounted transfers.
+The user confirmed repeated manual transfers, inventory preservation, return locations, reconnect persistence, and controlled server-restart persistence. The user also confirmed automatic travel in both directions and persistence across reconnect/restart on 0.2.0; follow [Phase 2 instructions](phase-2.md) and the [suspension regression checks](world-suspension.md) for 0.3.0. The upstream mod still blocks mounted transfers.
 
 ## Rollback to baseline
 

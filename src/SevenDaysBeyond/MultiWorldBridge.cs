@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using HarmonyLib;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace SevenDaysBeyond
 {
@@ -39,6 +40,13 @@ namespace SevenDaysBeyond
         internal static World World(object c) { return c == null ? null : (World)world.GetValue(c); }
         internal static string Name(object c) { return c == null ? "" : (string)name.GetValue(c); }
         internal static bool Available(object c) { return c != null && !(bool)closed.GetValue(c) && (bool)initialized.GetValue(c) && World(c) != null; }
+        internal static object[] AllContexts()
+        {
+            var list = new List<object>();
+            foreach (object pair in (IEnumerable)contexts.GetValue(null))
+                list.Add(pair.GetType().GetProperty("Value").GetValue(pair, null));
+            return list.ToArray();
+        }
         internal static object Find(string label)
         {
             // ConcurrentDictionary implements IEnumerable<KeyValuePair<World, Context>>.
@@ -48,6 +56,26 @@ namespace SevenDaysBeyond
                 if (Name(c) == label) return c;
             }
             return null;
+        }
+        internal static object Active() { return Method("ActiveContext").Invoke(null, null); }
+        internal static object Source(object r) { return Field(r.GetType(), "Source", Instance).GetValue(r); }
+        internal static object[] Requests() { return ((IDictionary)transfers.GetValue(null)).Values.Cast<object>().ToArray(); }
+        internal static GameTimer Timer(object c) { return (GameTimer)Field(ContextType,"Timer",Instance).GetValue(c); }
+        internal static WaterSimulationNative Water(object c) { return (WaterSimulationNative)Field(ContextType,"Water",Instance).GetValue(c); }
+        internal static Scene Scene(object c) { return (Scene)Field(ContextType,"Scene",Instance).GetValue(c); }
+        internal static bool Repeated { get { return (bool)Field(Type,"repeatedGlobalFrame",Static).GetValue(null); } }
+        internal static void Rebase(object c)
+        {
+            GameTimer t = Timer(c);
+            // Keep tick counters; discard elapsed wall time and fractional catch-up only.
+            var watch = (System.Diagnostics.Stopwatch)Field(typeof(GameTimer),"ms",Instance).GetValue(t);
+            t.lastMillis = watch.ElapsedMilliseconds;
+            t.elapsedTicks = 0; t.elapsedTicksD = 0; t.elapsedPartialTicks = 0;
+            Field(ContextType,"PhysicsAccumulator",Instance).SetValue(c, 0f);
+            var slots = (IDictionary)Field(ContextType,"Slots",Instance).GetValue(c);
+            object slot = slots["GameManager::lastTime"];
+            if (slot == null) throw new MissingFieldException("World slot GameManager::lastTime");
+            slot.GetType().GetProperty("Value",Instance).SetValue(slot, Time.time, null);
         }
         internal static object Transfer(ClientInfo c) { return ((IDictionary)transfers.GetValue(null))[c]; }
         internal static bool RollingBack(object r) { return (bool)rollingBack.GetValue(r); }

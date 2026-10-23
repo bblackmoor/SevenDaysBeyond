@@ -19,7 +19,7 @@ class BorderPolicyTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             output = Path(folder) / 'BorderPolicyTests.dll'
             dev.compile_sources(dotnet, compiler,
-                [ROOT / 'src/SevenDaysBeyond/BorderPolicy.cs', ROOT / 'tests/BorderPolicyTests.cs'],
+                [ROOT / 'src/SevenDaysBeyond/BorderPolicy.cs', ROOT / 'src/SevenDaysBeyond/SuspensionPolicy.cs', ROOT / 'tests/BorderPolicyTests.cs'],
                 list(references.glob('*.dll')), output, executable=True, nullable=False)
             output.with_suffix('.runtimeconfig.json').write_text(json.dumps({'runtimeOptions': {
                 'tfm':'net8.0','framework':{'name':'Microsoft.NETCore.App','version':'8.0.0'}}}))

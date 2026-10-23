@@ -51,6 +51,15 @@ internal static class BorderPolicyTests
         Check(!LandingRules.Ground(false,false,false,0,false,-128),"props and structures rejected");
         Check(!LandingRules.Ground(false,false,true,1,false,-128),"damaging ground rejected");
         Check(!LandingRules.Ground(false,false,true,0,true,-128),"ground buffs rejected");
+        Check(SuspensionPolicy.MustRun(1,false,false,false,100,0),"occupied world wakes immediately");
+        Check(SuspensionPolicy.MustRun(0,true,false,false,100,0),"joining client wakes destination before spawn");
+        Check(SuspensionPolicy.MustRun(0,false,true,false,100,0),"transfer source/destination protected");
+        Check(SuspensionPolicy.MustRun(0,false,false,true,100,0),"preflight observer protected");
+        Check(SuspensionPolicy.MustRun(0,false,false,false,109.9f,100),"grace permits save and worker drain");
+        Check(!SuspensionPolicy.MustRun(0,false,false,false,110,100),"empty world sleeps at grace deadline");
+        Check(!SuspensionPolicy.MustRun(0,false,false,false,1000,100),"long idle stays asleep");
+        Check(SuspensionPolicy.MustRun(0,false,true,false,1000,100),"new reservation wakes long-idle world");
+        Check(SuspensionPolicy.MustRun(0,false,false,false,100,100),"release starts fresh grace");
         Console.WriteLine("Border policy and landing rules: PASS ("+assertions+" assertions)");
     }
 }

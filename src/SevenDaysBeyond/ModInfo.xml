@@ -2,8 +2,8 @@
 <xml>
   <Name value="SevenDaysBeyond" />
   <DisplayName value="Seven Days Beyond" />
-  <Description value="Experimental two-world on-foot border travel with compatibility diagnostics." />
+  <Description value="On-foot border travel and empty-world suspension." />
   <Author value="Brandon Blackmoor" />
-  <Version value="0.2.0" />
+  <Version value="0.3.0" />
   <SkipWithAntiCheat value="true" />
 </xml>

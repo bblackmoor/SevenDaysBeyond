@@ -73,3 +73,7 @@ From a LAN gaming PC running V 3.3.0, use the game's direct-IP connection to ANN
 ## Phase 2 test deployment
 
 The user confirmed the manual two-world baseline, reconnect, and game-server restart checks. The server now runs the opt-in companion 0.2.0 for the [automatic border test](phase-2.md), using the same isolated saves and upstream client package. The prior companion and saves were backed up before updating. Both actual-map landing probes passed after the headless lighting-readiness correction. Real client automatic crossings remain pending.
+
+## Empty-world suspension deployment
+
+Companion 0.3.0 is installed with opt-in empty-world suspension. Both map startup/landing checks and the actual-scene freeze, independent reservation wake, global-task continuity and refreeze tests passed on 2026-10-21. See [suspension details and rollback](world-suspension.md). The original successful 0.2.0 client transfer/reconnect/restart tests are recorded there; joining and crossing on 0.3.0 remain the next client regression check.

@@ -1,6 +1,6 @@
 # Development setup
 
-The project provides a dependency inspector, runtime compatibility checks, and an opt-in Phase 2 on-foot border companion. Without BoundaryTest.xml, the companion installs no travel patches. See [Phase 2](phase-2.md) for scope and client testing.
+The project provides a dependency inspector, runtime compatibility checks, and an opt-in Phase 2 on-foot border companion. Without BoundaryTest.xml, the companion installs no travel or suspension patches. Suspension additionally requires freezeEmptyWorlds="true". See [Phase 2](phase-2.md) for scope and client testing.
 
 ## Prerequisites
 

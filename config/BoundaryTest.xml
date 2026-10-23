@@ -1,3 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Disposable West/East server only. Omit this file to disable border travel. -->
-<SevenDaysBeyond phase2="true" allowApproachCommand="true" />
+<SevenDaysBeyond phase2="true" allowApproachCommand="true" freezeEmptyWorlds="true" suspensionSelfTest="true" />

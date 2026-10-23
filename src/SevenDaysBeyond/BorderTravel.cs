@@ -64,10 +64,18 @@ namespace SevenDaysBeyond
                 Patch("RestoreSharedCharacter", "PlaceArrival", false);
                 Patch("BeginSessionWorldChange", "BeforeSwitch", true);
                 ModEvents.ChatMessage.RegisterHandler(OnChat);
+                if (config.DocumentElement.GetAttribute("freezeEmptyWorlds") == "true")
+                    WorldSuspension.Install(upstream, config.DocumentElement.GetAttribute("suspensionSelfTest") == "true");
                 enabled = true;
                 Log.Out("[SevenDaysBeyond] BORDER_TRAVEL_ENABLED West/east <-> East/west; warning=700m; trigger=500m; arrival=600m; on-foot only; approachCommand=" + allowApproach);
             }
             catch { harmony.UnpatchSelf(); throw; }
+        }
+        internal static IEnumerable<object> ReservedContexts()
+        {
+            foreach (Probe p in probes) yield return p.Context;
+            foreach (State s in states.Values)
+                if (s.Pending != null) { yield return s.Pending.Source; yield return s.Pending.Destination; }
         }
         private static void Patch(string upstream, string ours, bool prefix)
         {
@@ -335,6 +343,7 @@ namespace SevenDaysBeyond
                         BorderEdge edge = BorderPolicy.Nearest(b, p.position.x, p.position.z, out distance);
                         Say(c, "World: " + MultiWorldBridge.Name(context) + "; nearest edge: " + edge + "; distance: " + distance.ToString("0", CultureInfo.InvariantCulture)
                             + " m. Crossing starts 500 m inside the edge; warnings start at 700 m.");
+                        WorldSuspension.Report(c);
                     }
                     else
                     {

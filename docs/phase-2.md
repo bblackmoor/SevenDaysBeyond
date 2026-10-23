@@ -57,3 +57,7 @@ The first runtime probes caught an overly strict readiness check: `Chunk.IsIniti
 The corrected companion loaded on ANNWN and reported `UPSTREAM_CONTRACT_OK hooks=12` and `BORDER_TRAVEL_ENABLED`. Both worlds reached `MULTIWORLD_READY`. Actual extents for each map were `(-3072,0,-3072)` to `(3072,255,3072)`. The safety probes passed at West `(2468.50,95.10,-7.50)` and East `(-2471.50,43.10,0.50)`. The service remained active, with zero automatic restarts and roughly 3 GB systemd-accounted memory at the check. No managed exception or companion initialization failure was observed.
 
 Deployed companion SHA256: `28ae2b0746232d6fee83a3bc3d16bf9b11adec5e72458d35d68e69ec5ffde2a6`. Final whole-package SHA256: `e5a6d99878410ac6f01ecbfbe2e2ab7e094c11a98e3671aa14c8c32a22bc131f`. The package is retained at `/srv/seven-days-beyond/tools/SevenDaysBeyond-Phase2-Server.zip`. No real client automatic crossing has yet been observed; the next step is the client test above.
+
+## Client results and next prototype
+
+The user confirmed automatic crossings in both directions with newly collected items preserved, followed by successful reconnect and game-server restart persistence checks. Two-player crossings remain untested by explicit user choice. The subsequent [empty-world suspension prototype](world-suspension.md) uses companion 0.3.0 and requires a new client regression check despite retaining the same client package.

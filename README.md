@@ -15,7 +15,7 @@ Vehicle and passenger transfers need separate investigation. Safe arrival, disco
 
 ## Status
 
-The two-world baseline passed repeated manual transfers, inventory/location checks, reconnects, and a controlled server restart on ANNWN. Phase 2 now provides an opt-in server companion for automatic on-foot West/East border crossings, boundary warnings, destination preloading and ground checks, and request-bound arrival placement. Real client automatic-crossing tests are pending; see [the Phase 2 test](docs/phase-2.md). The full 64-map grid, frozen simulation, shared clock and portable quests remain planned.
+The two-world baseline passed repeated manual transfers, inventory/location checks, reconnects, and a controlled server restart on ANNWN. Phase 2 now provides an opt-in server companion for automatic on-foot West/East border crossings, boundary warnings, destination preloading and ground checks, and request-bound arrival placement. Single-player automatic crossings, reconnects and restart persistence passed. Companion 0.3.0 adds opt-in [empty-world suspension](docs/world-suspension.md), with join/transfer reservations and separate physics/component gates. See [the Phase 2 test](docs/phase-2.md) for travel checks. Two-player crossings are untested; the full 64-map grid, shared clock and portable quests remain planned.
 
 See [development setup](docs/development.md) for dependency acquisition, build commands, and the first in-game checks, and [phase 1 findings](docs/phase-1.md) for integration points and remaining work.
 
