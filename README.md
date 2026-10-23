@@ -29,6 +29,14 @@ The starting reference is LITW MultiWorld 0.6.2, supplied as a compiled mod. Its
 
 Current gameplay settings are documented in [ANNWN sandbox settings](docs/annwn-sandbox.md), with the versioned preset and native code under `config/`.
 
+## Feature backlog
+
+The following features are intended future work; detailed design and implementation order remain open.
+
+- **In-game sandbox settings tool:** view and edit sandbox settings for other maps, and copy the current map's sandbox settings to one selected map or all other maps.
+- **Graphical grid map:** an in-game view of every map in the grid, with zooming in and out and map markers. Marker types and further navigation controls will be defined during design.
+- **All-map quest tracker:** an in-game graphical tracker showing quests across all maps, with sorting by map, tier or quest name. These are the initial proposed sort options and can be refined during design.
+
 ## Repository layout
 
 - `src/SevenDaysBeyond/` — compatibility checks and experimental two-world on-foot travel.
