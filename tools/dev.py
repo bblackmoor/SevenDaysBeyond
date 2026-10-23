@@ -91,6 +91,7 @@ def main():
         return 0
     if args.command == "build" and args.reference_only:
         parser.error("build cannot skip dependencies with --reference-only")
+    run([sys.executable, ROOT / "tools/check-localization.py"])
     dotnet = shutil.which(args.dotnet)
     if not dotnet:
         raise ValueError("Cannot find .NET; supply --dotnet with the SDK's dotnet executable.")

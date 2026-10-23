@@ -44,6 +44,7 @@ namespace SevenDaysBeyond
                 Log.Out("[SevenDaysBeyond] UPSTREAM_CONTRACT_OK hooks=" + MultiWorldContract.Hooks.Length
                     + "; game=" + typeof(IModApi).Assembly.ManifestModule.ModuleVersionId
                     + "; upstream binary verified.");
+                PlayerMessages.Install(type);
                 if (GameManager.IsDedicatedServer) BorderTravel.Install(type);
                 else ClientDebugState.Install(type);
             }

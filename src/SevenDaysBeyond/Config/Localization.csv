@@ -1,0 +1,57 @@
+Key,english,spanish,latam
+sdb_approach_disabled,Test approach command is disabled.,El comando de aproximación de prueba está desactivado.,El comando de aproximación de prueba está desactivado.
+sdb_approach_dismount,Dismount before preparing a test approach.,Bájate del vehículo antes de preparar una aproximación de prueba.,Bájate del vehículo antes de preparar una aproximación de prueba.
+sdb_approach_preparing,Preparing a safe test approach to the border. Stay nearby.,Preparando un punto seguro de prueba cerca de la frontera. Quédate cerca.,Preparando un punto seguro de prueba cerca de la frontera. Quédate cerca.
+sdb_approach_ready,At the test approach. Walk {0} toward the travel line.,"Ya estás en el punto de prueba. Camina hacia el {0}, en dirección a la línea de cruce.","Ya estás en el punto de prueba. Camina hacia el {0}, en dirección a la línea de cruce."
+sdb_approach_usage,"Use /sdb approach east, west, north or south.","Usa /sdb approach east, west, north o south.","Usa /sdb approach east, west, north o south."
+sdb_approach_wait,Please wait a few seconds before the next test approach.,Espera unos segundos antes de la siguiente aproximación de prueba.,Espera unos segundos antes de la siguiente aproximación de prueba.
+sdb_border_closed,Closed border {0} m ahead. Turn back; reaching it will move you inland.,"Frontera cerrada a {0} m. Regresa; si la alcanzas, serás trasladado hacia el interior.","Frontera cerrada a {0} m. Regresa; si la alcanzas, serás trasladado hacia el interior."
+sdb_border_open,Border {0} m ahead: continue on foot to travel to {1}. Your carried items travel with you.,Frontera a {0} m: continúa a pie para viajar a {1}. Los objetos que llevas viajan contigo.,Frontera a {0} m: continúa a pie para viajar a {1}. Los objetos que llevas viajan contigo.
+sdb_border_status,World: {0}; nearest edge: {1}; distance: {2} m. Travel boundary: {3} m inside the map edge; warnings: 50 m and 10 m before that boundary.,Mundo: {0}; borde más cercano: {1}; distancia: {2} m. Límite de cruce: {3} m hacia el interior desde el borde del mapa; avisos a 50 m y 10 m antes de ese límite.,Mundo: {0}; borde más cercano: {1}; distancia: {2} m. Límite de cruce: {3} m hacia el interior desde el borde del mapa; avisos a 50 m y 10 m antes de ese límite.
+sdb_clock_disabled,Shared calendar is disabled.,El calendario compartido está desactivado.,El calendario compartido está desactivado.
+sdb_clock_paused,paused,en pausa,en pausa
+sdb_clock_report,"Shared time: day {0}, {1}:{2}; {3}.","Hora compartida: día {0}, {1}:{2}; {3}.","Hora compartida: día {0}, {1}:{2}; {3}."
+sdb_clock_running,running,en marcha,en marcha
+sdb_crossing_cancelled,Border preparation cancelled. You remain in this world.,Se canceló la preparación del cruce. Permaneces en este mundo.,Se canceló la preparación del cruce. Permaneces en este mundo.
+sdb_crossing_failed,Border transfer could not start. Try again shortly.,No se pudo iniciar el cruce. Inténtalo de nuevo en unos segundos.,No se pudo iniciar el cruce. Inténtalo de nuevo en unos segundos.
+sdb_crossing_ground_changed,Crossing cancelled: arrival ground changed. You remain in the source world.,Cruce cancelado: el terreno de llegada ha cambiado. Permaneces en el mundo de origen.,Cruce cancelado: el terreno de llegada ha cambiado. Permaneces en el mundo de origen.
+sdb_crossing_in_progress,A crossing is already in progress.,Ya hay un cruce en curso.,Ya hay un cruce en curso.
+sdb_destination_unavailable,Destination unavailable. You remain in this world.,El destino no está disponible. Permaneces en este mundo.,El destino no está disponible. Permaneces en este mundo.
+sdb_direction_east,east,este,este
+sdb_direction_north,north,norte,norte
+sdb_direction_south,south,sur,sur
+sdb_direction_west,west,oeste,oeste
+sdb_grid_route,"{0} ({1},{2}): {3} -> {4}","{0} ({1},{2}): {3} -> {4}","{0} ({1},{2}): {3} -> {4}"
+sdb_landing_preparing,Checking the arrival ground in {0}. Stay nearby; move away to cancel.,Comprobando el terreno de llegada en {0}. Quédate cerca; aléjate para cancelar.,Comprobando el terreno de llegada en {0}. Quédate cerca; aléjate para cancelar.
+sdb_landing_timeout,No safe arrival ground found in time. You remain in this world.,No se encontró terreno seguro a tiempo. Permaneces en este mundo.,No se encontró terreno seguro a tiempo. Permaneces en este mundo.
+sdb_map_away,away; objectives inactive,otro mapa; objetivos inactivos,otro mapa; objetivos inactivos
+sdb_map_current,current map,mapa actual,mapa actual
+sdb_quest_diagnostic,{0}: {1}; state={2}; objectives={3}; map targets={4},{0}: {1}; estado={2}; objetivos={3}; destinos del mapa={4},{0}: {1}; estado={2}; objetivos={3}; destinos del mapa={4}
+sdb_quest_fixture,"Native quest fixture: F1, givequest sdb_test_fieldwork. Kill 3 zombies on its owning map; progress is stored in that map's page.","Misión de prueba: F1, givequest sdb_test_fieldwork. Mata a 3 zombis en el mapa de la misión; el progreso se guarda en la página de ese mapa.","Misión de prueba: F1, givequest sdb_test_fieldwork. Mata a 3 zombis en el mapa de la misión; el progreso se guarda en la página de ese mapa."
+sdb_quest_state_cancelled,cancelled,cancelada,cancelada
+sdb_quest_state_completed,completed,completada,completada
+sdb_quest_state_failed,failed,fallida,fallida
+sdb_quest_state_inprogress,in progress,en curso,en curso
+sdb_quest_state_notstarted,not started,sin empezar,sin empezar
+sdb_quest_state_readyforturnin,ready to turn in,lista para entregar,lista para entregar
+sdb_quests_map,{0} ({1}): {2} native quests.,{0} ({1}): {2} misiones del juego.,{0} ({1}): {2} misiones del juego.
+sdb_quests_more,Further entries retained in the quest book; native journal shows this map's full list.,Las demás entradas se conservan en el libro de misiones; el diario del juego muestra la lista completa de este mapa.,Las demás entradas se conservan en el libro de misiones; el diario del juego muestra la lista completa de este mapa.
+sdb_quests_unavailable,Quest book unavailable; see server log. Native map saves remain in use.,El libro de misiones no está disponible; consulta el registro del servidor. Se siguen usando los archivos de guardado de cada mapa.,El libro de misiones no está disponible; consulta el registro del servidor. Se siguen usando los archivos de guardado de cada mapa.
+sdb_retreat_unavailable,No clear retreat point found. Turn back from the edge.,No se encontró un lugar despejado para retroceder. Aléjate del borde.,No se encontró un lugar despejado para retroceder. Aléjate del borde.
+sdb_suspension_disabled,Empty-world suspension is disabled.,La suspensión de mundos vacíos está desactivada.,La suspensión de mundos vacíos está desactivada.
+sdb_suspension_report,{0}: {1}; players={2}; simulation frames={3},{0}: {1}; jugadores={2}; fotogramas de simulación={3},{0}: {1}; jugadores={2}; fotogramas de simulación={3}
+sdb_test_active,A test is active. Use /sdb questtest cancel first.,Ya hay una prueba activa. Usa primero /sdb questtest cancel.,Ya hay una prueba activa. Usa primero /sdb questtest cancel.
+sdb_test_choose_map,Choose a different configured map: {0},Elige otro mapa configurado: {0},Elige otro mapa configurado: {0}
+sdb_test_fieldwork_description,"Quest persistence test. Kill one zombie, cross to another map, then return and finish the remaining two. This quest belongs to the map where you accepted it. No rewards.","Prueba de persistencia de misiones. Mata a un zombi, cruza a otro mapa y regresa para matar a los otros dos. Esta misión pertenece al mapa donde la aceptaste. Sin recompensas.","Prueba de persistencia de misiones. Mata a un zombi, cruza a otro mapa y regresa para matar a los otros dos. Esta misión pertenece al mapa donde la aceptaste. Sin recompensas."
+sdb_test_fieldwork_name,SDB Test: Three Zombies,Prueba SDB: Tres zombis,Prueba SDB: Tres zombis
+sdb_test_none,No travel test. Use /sdb questtest start (or start 30 for an expiry test).,No hay ninguna prueba de viaje. Usa /sdb questtest start (o start 30 para probar la caducidad).,No hay ninguna prueba de viaje. Usa /sdb questtest start (o start 30 para probar la caducidad).
+sdb_test_report,Travel test: {0}; {1} -> {2} -> {1}; legs={3}/2; next={4}; calendar ticks remaining={5}. No item or XP rewards.,Prueba de viaje: {0}; {1} -> {2} -> {1}; etapas={3}/2; siguiente={4}; tics restantes del calendario={5}. Sin recompensas de objetos ni experiencia.,Prueba de viaje: {0}; {1} -> {2} -> {1}; etapas={3}/2; siguiente={4}; tics restantes del calendario={5}. Sin recompensas de objetos ni experiencia.
+sdb_test_state_active,active,activa,activa
+sdb_test_state_cancelled,cancelled,cancelada,cancelada
+sdb_test_state_complete,complete,completada,completada
+sdb_test_state_expired,expired,caducada,caducada
+sdb_test_usage,Use /sdb questtest start [10-1800 seconds] [target map].,Usa /sdb questtest start [10-1800 segundos] [mapa de destino].,Usa /sdb questtest start [10-1800 segundos] [mapa de destino].
+sdb_vehicle_crossing,Vehicle crossings are not supported. Turn back and dismount away from the edge.,No se puede cruzar en un vehículo. Regresa y bájate lejos del borde.,No se puede cruzar en un vehículo. Regresa y bájate lejos del borde.
+sdb_wait_crossing,Wait for the crossing to finish.,Espera a que termine el cruce.,Espera a que termine el cruce.
+sdb_world_awake,awake,activo,activo
+sdb_world_suspended,suspended,suspendido,suspendido

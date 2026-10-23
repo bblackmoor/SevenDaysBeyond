@@ -199,10 +199,10 @@ namespace SevenDaysBeyond
         }
         internal static void Report(ClientInfo client)
         {
-            if(!enabled) { MultiWorldBridge.Reply(client,"Empty-world suspension is disabled."); return; }
+            if(!enabled) { PlayerMessages.Send(client,"sdb_suspension_disabled"); return; }
             foreach(State s in states.Values)
-                MultiWorldBridge.Reply(client,"[Seven Days Beyond] "+MultiWorldBridge.Name(s.Context)+": "+(s.Sleeping?"suspended":"awake")
-                    +"; players="+MultiWorldBridge.World(s.Context).Players.Count+"; simulation frames="+s.Frames);
+                PlayerMessages.Send(client,"sdb_suspension_report", MultiWorldBridge.Name(s.Context),
+                    PlayerMessages.Key(s.Sleeping ? "sdb_world_suspended" : "sdb_world_awake"), MultiWorldBridge.World(s.Context).Players.Count, s.Frames);
         }
         private static void FailOpen(Exception error)
         {

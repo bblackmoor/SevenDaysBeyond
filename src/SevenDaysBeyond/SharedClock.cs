@@ -219,9 +219,10 @@ namespace SevenDaysBeyond
         }
         internal static void Report(ClientInfo client)
         {
-            if(!enabled) { MultiWorldBridge.Reply(client,"Shared calendar is disabled."); return; }
+            if(!enabled) { PlayerMessages.Send(client,"sdb_clock_disabled"); return; }
             var time=GameUtils.WorldTimeToElements(Now);
-            MultiWorldBridge.Reply(client,"[Seven Days Beyond] Shared time: day "+time.Item1+", "+time.Item2.ToString("00",CultureInfo.InvariantCulture)+":"+time.Item3.ToString("00",CultureInfo.InvariantCulture)+"; "+(running?"running":"paused")+".");
+            PlayerMessages.Send(client,"sdb_clock_report", time.Item1, time.Item2.ToString("00",CultureInfo.InvariantCulture),
+                time.Item3.ToString("00",CultureInfo.InvariantCulture), PlayerMessages.Key(running ? "sdb_clock_running" : "sdb_clock_paused"));
         }
     }
 }

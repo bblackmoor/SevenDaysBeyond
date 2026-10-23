@@ -107,7 +107,7 @@ namespace SevenDaysBeyond
         }
         private static EntityPlayer Player(ClientInfo c, object context)
         { return MultiWorldBridge.World(context).GetEntity(c.entityId) as EntityPlayer; }
-        private static void Say(ClientInfo c, string text) { MultiWorldBridge.Reply(c, "[Seven Days Beyond] " + text); }
+        private static void Say(ClientInfo c, string key, params object[] args) { PlayerMessages.Send(c, key, args); }
         private static void AfterWorldTick()
         {
             if (!enabled || failed || !GameManager.IsDedicatedServer || !MultiWorldBridge.Ready || Time.realtimeSinceStartup < nextTick) return;
@@ -150,8 +150,8 @@ namespace SevenDaysBeyond
                         if (warningLevel > state.WarningLevel || Time.realtimeSinceStartup >= state.WarnAt)
                         {
                             string remaining = Math.Max(0, distance - BorderPolicy.Trigger).ToString("0", CultureInfo.InvariantCulture);
-                            Say(c, dest == null ? "Closed border " + remaining + " m ahead. Turn back; reaching it will move you inland."
-                                : "Border " + remaining + " m ahead: continue on foot to travel to " + dest + ". Your carried items travel with you.");
+                            if (dest == null) Say(c, "sdb_border_closed", remaining);
+                            else Say(c, "sdb_border_open", remaining, dest);
                             state.WarnAt = Time.realtimeSinceStartup + 15;
                         }
                         state.WarningLevel = warningLevel;
@@ -159,14 +159,14 @@ namespace SevenDaysBeyond
                         if (p.AttachedToEntity != null)
                         {
                             if (Time.realtimeSinceStartup >= state.Cooldown)
-                            { Say(c, "Vehicle crossings are not supported. Turn back and dismount away from the edge."); state.Cooldown = Time.realtimeSinceStartup + 10; }
+                            { Say(c, "sdb_vehicle_crossing"); state.Cooldown = Time.realtimeSinceStartup + 10; }
                             continue;
                         }
                         // Retreat before preflight, also protecting closed edges and cooldowns.
                         if (!Retreat(c, p, state, b)) continue;
                         if (dest == null || Time.realtimeSinceStartup < state.Cooldown) continue;
                         object target = MultiWorldBridge.Find(dest);
-                        if (!MultiWorldBridge.Available(target)) { Say(c, "Destination unavailable. You remain in this world."); state.Cooldown = Time.realtimeSinceStartup + 10; continue; }
+                        if (!MultiWorldBridge.Available(target)) { Say(c, "sdb_destination_unavailable"); state.Cooldown = Time.realtimeSinceStartup + 10; continue; }
                         MapBounds tb = Bounds(target);
                         float tx, tz;
                         BorderPolicy.ArrivalPoint(b, tb, edge, p.position.x, p.position.z, out tx, out tz);
@@ -221,7 +221,7 @@ namespace SevenDaysBeyond
             if (!SafeLanding.Find(p.world, b, new Vector3(x, 80, z), out safe))
             {
                 if (!state.HasSafe || !SafeLanding.TryAt(p.world, b, (int)Math.Floor(state.Safe.x), (int)Math.Floor(state.Safe.z), out safe))
-                { if (Time.realtimeSinceStartup >= state.Cooldown) Say(c, "No clear retreat point found. Turn back from the edge."); state.Cooldown = Time.realtimeSinceStartup + 5; return false; }
+                { if (Time.realtimeSinceStartup >= state.Cooldown) Say(c, "sdb_retreat_unavailable"); state.Cooldown = Time.realtimeSinceStartup + 5; return false; }
             }
             Teleport(c, p, safe);
             return true;
@@ -238,8 +238,8 @@ namespace SevenDaysBeyond
                 Deadline = Time.realtimeSinceStartup + 30, Started = Time.realtimeSinceStartup, Approach = approach };
             using (MultiWorldBridge.Scope(target)) job.Observer = MultiWorldBridge.World(target).m_ChunkManager.AddChunkObserver(centre, false, 8, -1);
             state.Pending = job;
-            Say(c, approach ? "Preparing a safe test approach to the border. Stay nearby."
-                : "Checking the arrival ground in " + MultiWorldBridge.Name(target) + ". Stay nearby; move away to cancel.");
+            if (approach) Say(c, "sdb_approach_preparing");
+            else Say(c, "sdb_landing_preparing", MultiWorldBridge.Name(target));
         }
         private static void TickJob(State state)
         {
@@ -258,9 +258,9 @@ namespace SevenDaysBeyond
             EntityPlayer p = Player(job.Client, job.Source);
             if (p == null || p.IsDead() || p.AttachedToEntity != null || transfer != null || MultiWorldBridge.Resolve(job.Client) != job.Source
                 || (Time.realtimeSinceStartup - job.Started > 2 && Vector3.Distance(p.position, job.Hold) > 16))
-            { Abort(state, "Border preparation cancelled. You remain in this world."); return; }
+            { Abort(state, "sdb_crossing_cancelled"); return; }
             if (Time.realtimeSinceStartup >= job.Deadline)
-            { Abort(state, "No safe arrival ground found in time. You remain in this world."); return; }
+            { Abort(state, "sdb_landing_timeout"); return; }
             if (Time.realtimeSinceStartup < job.CheckAt) return;
             job.CheckAt = Time.realtimeSinceStartup + 1;
             using (MultiWorldBridge.Scope(job.Destination))
@@ -272,13 +272,13 @@ namespace SevenDaysBeyond
                 using (MultiWorldBridge.Scope(job.Source)) Teleport(job.Client, p, job.Point);
                 float remaining;
                 BorderEdge approachEdge=BorderPolicy.Nearest(job.Bounds,job.Point.x,job.Point.z,out remaining);
-                Say(job.Client, "At the test approach. Walk " + approachEdge.ToString().ToLowerInvariant() + " toward the travel line.");
+                Say(job.Client, "sdb_approach_ready", PlayerMessages.Direction(approachEdge));
                 Log.Out("[SevenDaysBeyond] BORDER_TEST_APPROACH " + MultiWorldBridge.Name(job.Source) + " point=" + job.Point);
                 state.Cooldown = Time.realtimeSinceStartup + 3;
                 Cleanup(state); return;
             }
             using (MultiWorldBridge.Scope(job.Source)) job.Request = MultiWorldBridge.Start(job.Client, MultiWorldBridge.Name(job.Destination));
-            if (job.Request == null) { Abort(state, "Border transfer could not start. Try again shortly."); return; }
+            if (job.Request == null) { Abort(state, "sdb_crossing_failed"); return; }
             Log.Out("[SevenDaysBeyond] BORDER_TRANSFER_REQUEST " + MultiWorldBridge.Name(job.Source) + " -> " + MultiWorldBridge.Name(job.Destination) + " landing=" + job.Point);
         }
         private static void Abort(State state, string text)
@@ -331,7 +331,7 @@ namespace SevenDaysBeyond
             using (MultiWorldBridge.Scope(j.Destination)) safe = SafeLanding.TryAt(MultiWorldBridge.World(j.Destination), j.Bounds,
                 (int)Math.Floor(j.Point.x), (int)Math.Floor(j.Point.z), out verified) && Vector3.Distance(verified, j.Point) < 0.1f;
             if (safe) return true;
-            MultiWorldBridge.CancelBeforeSwitch(__0, __1, "Crossing cancelled: arrival ground changed. You remain in the source world.");
+            MultiWorldBridge.CancelBeforeSwitch(__0, __1, "sdb_crossing_ground_changed");
             state.Cooldown = Time.realtimeSinceStartup + 10; Cleanup(state); return false;
         }
         private static ModEvents.EModEventResult OnChat(ref ModEvents.SChatMessageData data)
@@ -351,14 +351,18 @@ namespace SevenDaysBeyond
                     MapBounds b = Bounds(context);
                     if (message == "/sdb time") SharedClock.Report(c);
                     else if(message == "/sdb map")
+                    {
                         foreach(GridCell cell in BorderPolicy.Grid.Cells.OrderByDescending(v=>v.Z).ThenBy(v=>v.X))
-                            Say(c,cell.Name+" ("+cell.X+","+cell.Z+"): "+string.Join(", ",Enum.GetValues(typeof(BorderEdge)).Cast<BorderEdge>().Where(e=>BorderPolicy.Destination(cell.Name,e)!=null).Select(e=>e+" -> "+BorderPolicy.Destination(cell.Name,e))));
+                            foreach (BorderEdge exit in Enum.GetValues(typeof(BorderEdge)))
+                                if (BorderPolicy.Destination(cell.Name, exit) != null)
+                                    Say(c, "sdb_grid_route", cell.Name, cell.X, cell.Z, PlayerMessages.Direction(exit), BorderPolicy.Destination(cell.Name, exit));
+                    }
                     else if (message == "/sdb status")
                     {
                         float distance;
                         BorderEdge edge = BorderPolicy.Nearest(b, p.position.x, p.position.z, out distance);
-                        Say(c, "World: " + MultiWorldBridge.Name(context) + "; nearest edge: " + edge + "; distance: " + distance.ToString("0", CultureInfo.InvariantCulture)
-                            + " m. Travel boundary: " + BorderPolicy.Trigger + " m inside the map edge; warnings: 50 m and 10 m before that boundary.");
+                        Say(c, "sdb_border_status", MultiWorldBridge.Name(context), PlayerMessages.Direction(edge),
+                            distance.ToString("0", CultureInfo.InvariantCulture), BorderPolicy.Trigger);
                         WorldSuspension.Report(c);
                         SharedClock.Report(c);
                     }
@@ -366,10 +370,10 @@ namespace SevenDaysBeyond
                     {
                         State state;
                         if (!states.TryGetValue(c, out state)) { state = new State { Context = context }; states.Add(c, state); }
-                        if (!allowApproach) Say(c, "Test approach command is disabled.");
-                        else if (state.Pending != null || MultiWorldBridge.Transfer(c) != null) Say(c, "A crossing is already in progress.");
-                        else if (p.AttachedToEntity != null) Say(c, "Dismount before preparing a test approach.");
-                        else if (Time.realtimeSinceStartup < state.Cooldown) Say(c, "Please wait a few seconds before the next test approach.");
+                        if (!allowApproach) Say(c, "sdb_approach_disabled");
+                        else if (state.Pending != null || MultiWorldBridge.Transfer(c) != null) Say(c, "sdb_crossing_in_progress");
+                        else if (p.AttachedToEntity != null) Say(c, "sdb_approach_dismount");
+                        else if (Time.realtimeSinceStartup < state.Cooldown) Say(c, "sdb_approach_wait");
                         else
                         {
                             BorderEdge edge=BorderPolicy.Grid.FirstExit(MultiWorldBridge.Name(context));
@@ -377,7 +381,7 @@ namespace SevenDaysBeyond
                             {
                                 string direction=message.Substring("/sdb approach ".Length);
                                 if(!new[]{"east","west","north","south"}.Contains(direction.ToLowerInvariant()) || !Enum.TryParse(direction,true,out edge))
-                                { Say(c,"Use /sdb approach east, west, north or south."); return (ModEvents.EModEventResult)2; }
+                                { Say(c,"sdb_approach_usage"); return (ModEvents.EModEventResult)2; }
                             }
                             float x = BorderPolicy.Clamp(p.position.x,b.MinX+BorderPolicy.Arrival,b.MaxX-BorderPolicy.Arrival);
                             float z = BorderPolicy.Clamp(p.position.z, b.MinZ + BorderPolicy.Arrival, b.MaxZ - BorderPolicy.Arrival);

@@ -2,8 +2,8 @@
 <configs>
   <append xpath="/quests">
     <quest id="sdb_test_fieldwork">
-      <property name="name" value="SDB Test: Three Zombies" />
-      <property name="description" value="Quest persistence test. Kill one zombie, cross to another map, then return and finish the remaining two. This quest belongs to the map where you accepted it. No rewards." />
+      <property name="name_key" value="sdb_test_fieldwork_name" />
+      <property name="description_key" value="sdb_test_fieldwork_description" />
       <property name="icon" value="ui_game_symbol_zombie" />
       <property name="repeatable" value="true" />
       <property name="shareable" value="false" />

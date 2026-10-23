@@ -132,13 +132,14 @@ namespace SevenDaysBeyond
             }
             catch(Exception e) { Fail(e); }
         }
-        private static void Say(ClientInfo client,string text) { MultiWorldBridge.Reply(client,"[Seven Days Beyond] "+text); }
+        private static void Say(ClientInfo client, string key, params object[] args) { PlayerMessages.Send(client, key, args); }
         private static void ReportTest(ClientInfo c,QuestBookState b)
         {
-            if(b.Test==null) { Say(c,"No travel test. Use /sdb questtest start (or start 30 for an expiry test)."); return; }
+            if(b.Test==null) { Say(c,"sdb_test_none"); return; }
             var t=b.Test;
             string goal=t.Stage==0?t.Target:t.Home;
-            Say(c,"Travel test: "+t.Status+"; "+t.Home+" -> "+t.Target+" -> "+t.Home+"; legs="+t.Stage+"/2; next="+goal+"; calendar ticks remaining="+(SharedClock.Now<t.Deadline?t.Deadline-SharedClock.Now:0)+". No item or XP rewards.");
+            Say(c, "sdb_test_report", PlayerMessages.Key("sdb_test_state_" + t.Status), t.Home, t.Target, t.Stage, goal,
+                SharedClock.Now < t.Deadline ? t.Deadline - SharedClock.Now : 0);
         }
         private static ModEvents.EModEventResult OnChat(ref ModEvents.SChatMessageData data)
         {
@@ -150,7 +151,7 @@ namespace SevenDaysBeyond
             {
                 lock(sync)
                 {
-                    if(MultiWorldBridge.Transfer(c)!=null) { Say(c,"Wait for the crossing to finish."); return (ModEvents.EModEventResult)2; }
+                    if(MultiWorldBridge.Transfer(c)!=null) { Say(c,"sdb_wait_crossing"); return (ModEvents.EModEventResult)2; }
                     object context=MultiWorldBridge.Resolve(c);
                     if(!MultiWorldBridge.Available(context)) return (ModEvents.EModEventResult)2;
                     string id=c.InternalId.CombinedString;
@@ -160,9 +161,13 @@ namespace SevenDaysBeyond
                     {
                         foreach(var p in b.Pages.Values.OrderBy(p=>p.Map,StringComparer.Ordinal))
                         {
-                            Say(c,p.Map+(p.Map==MultiWorldBridge.Name(context)?" (current map)":" (away; objectives inactive)")+": "+p.Summary.Length+" native quests.");
-                            foreach(string line in p.Summary.Take(12)) Say(c,p.Map+": "+line);
-                            if(p.Summary.Length>12) Say(c,"Further entries retained in the quest book; native journal shows this map's full list.");
+                            Say(c, "sdb_quests_map", p.Map, PlayerMessages.Key(p.Map == MultiWorldBridge.Name(context) ? "sdb_map_current" : "sdb_map_away"), p.Summary.Length);
+                            // Reconstruct diagnostics rather than displaying old English summary prose from saves.
+                            foreach (Quest quest in ReadJournal(Convert.FromBase64String(p.Journal)).quests.Take(12))
+                                Say(c, "sdb_quest_diagnostic", p.Map, quest.ID, PlayerMessages.Key("sdb_quest_state_" + quest.CurrentState.ToString().ToLowerInvariant()),
+                                    Diagnostic(string.Join(", ", quest.Objectives.Select(o => o.ID + "=" + o.CurrentValue))),
+                                    Diagnostic(string.Join(", ", quest.PositionData.Select(v => v.Key + "=" + v.Value))));
+                            if(p.Summary.Length>12) Say(c,"sdb_quests_more");
                         }
                         ReportTest(c,b);
                     }
@@ -172,13 +177,13 @@ namespace SevenDaysBeyond
                         if(parts.Length>=3 && parts[2]=="start")
                         {
                             int seconds=300;
-                            if(parts.Length>5 || (parts.Length>=4 && !int.TryParse(parts[3],out seconds)) || seconds<10 || seconds>1800) Say(c,"Use /sdb questtest start [10-1800 seconds] [target map].");
-                            else if(b.Test!=null && b.Test.Status=="active") Say(c,"A test is active. Use /sdb questtest cancel first.");
+                            if(parts.Length>5 || (parts.Length>=4 && !int.TryParse(parts[3],out seconds)) || seconds<10 || seconds>1800) Say(c,"sdb_test_usage");
+                            else if(b.Test!=null && b.Test.Status=="active") Say(c,"sdb_test_active");
                             else
                             {
                                 string home=MultiWorldBridge.Name(context),target=parts.Length==5?parts[4]:BorderPolicy.Destination(home,BorderPolicy.Grid.FirstExit(home));
                                 if(target==home || !BorderPolicy.Grid.Cells.Any(cell=>cell.Name==target))
-                                { Say(c,"Choose a different configured map: "+string.Join(", ",BorderPolicy.Grid.Cells.Select(cell=>cell.Name))); return (ModEvents.EModEventResult)2; }
+                                { Say(c,"sdb_test_choose_map", string.Join(", ",BorderPolicy.Grid.Cells.Select(cell=>cell.Name))); return (ModEvents.EModEventResult)2; }
                                 ulong budget=checked((ulong)seconds*(ulong)Math.Max(1,GameStats.GetInt(EnumGameStats.TimeOfDayIncPerSec)));
                                 b.Test=new TravelQuest {Home=home,Target=target,Deadline=checked(SharedClock.Now+budget)};
                                 b.Save(FilePath(id)); ReportTest(c,b);
@@ -186,15 +191,17 @@ namespace SevenDaysBeyond
                         }
                         else if(parts.Length==3 && parts[2]=="cancel")
                         { if(b.Test!=null && b.Test.Status=="active") { b.Test.Status="cancelled"; b.Save(FilePath(id)); } ReportTest(c,b); }
-                        else { ReportTest(c,b); Say(c,"Native quest fixture: F1, givequest sdb_test_fieldwork. Kill 3 zombies on its owning map; progress is stored in that map's page."); }
+                        else { ReportTest(c,b); Say(c,"sdb_quest_fixture"); }
                     }
                 }
             }
-            catch(Exception e) { Fail(e); Say(c,"Quest book unavailable; see server log. Native map saves remain in use."); }
+            catch(Exception e) { Fail(e); Say(c,"sdb_quests_unavailable"); }
             return (ModEvents.EModEventResult)2;
         }
         private static void Fail(Exception e)
         { enabled=false; Log.Error("[SevenDaysBeyond] QUEST_BOOK_DISABLED; native journals retained: "+e); }
+        private static string Diagnostic(string text)
+        { return text.Length <= 512 ? text : text.Substring(0, 512) + "…"; }
         private static void NativeSelfTest()
         {
             Quest q=QuestClass.CreateQuest("sdb_test_fieldwork");
