@@ -200,6 +200,10 @@ namespace SevenDaysBeyond
             Quest q=QuestClass.CreateQuest("sdb_test_fieldwork");
             if(q==null) throw new InvalidOperationException("Native test quest XML did not load.");
             var j=new QuestJournal(); q.OwnerJournal=j; j.quests.Add(q);
+            // Accepted quests receive an identity from SetupQuestCode, which needs a
+            // local player. Supply one only for this unsaved headless fixture.
+            q.QuestUniqueId="sdb-self-test-"+Guid.NewGuid().ToString("N");
+            q.QuestCode=q.QuestUniqueId.GetHashCode();
             q.Objectives[0].CurrentValue=1;
             byte[] bytes=WriteJournal(j); var copy=ReadJournal(bytes);
             if(copy.quests.Count!=1 || copy.quests[0].ID!=q.ID || copy.quests[0].Objectives[0].CurrentValue!=1) throw new InvalidDataException("Native quest progress roundtrip failed.");
@@ -207,3 +211,4 @@ namespace SevenDaysBeyond
         }
     }
 }
+
