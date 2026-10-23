@@ -19,3 +19,9 @@ The server now gives an early warning at 50 m and a close warning at 10 m before
 The travel line remains 500 m inside the raw map extent, outside the unsafe outer terrain. Thus the warning positions are 550 m and 510 m inside that extent. Crossing, safe-ground checks, arrival placement and closed-edge retreat keep their existing positions. This change reduces notification distance; it does not move players into the outer radiation zone. Arrivals remain 100 m clear of the travel line, outside both warning stages.
 
 The production geometry/landing/suspension-policy test passes 993 assertions, including exact warning boundaries and arrival clearance. The 0.4.0 shared-clock client check was reported working by the user; that result is independent of the debug-state bug.
+
+## Deployment status
+
+The 0.4.1 client ZIP was built and made available on 2026-10-21. The server ZIP passed the local build and geometry checks but its Gateway artifact check remained pending for over five minutes. No 0.4.1 server files were installed. ANNWN was restarted with the existing 0.4.0 companion rather than left stopped. The 50 m/10 m server warnings therefore remain pending deployment; the client debug-state update can be tested against 0.4.0 independently.
+
+Pending server package: `SevenDaysBeyond-Server-0.4.1.zip`, SHA256 `9ffd27ccd5bca341a11c6c2e4a252de3f40664ec34bc419a7de51b1158df755e`. Client package: `SevenDaysBeyond-Client-Debug-0.4.1.zip`, SHA256 `d058fcff569f0c456941ba35e366fbecc5f7d8235f5e595ada61f682a5083fa4`.
