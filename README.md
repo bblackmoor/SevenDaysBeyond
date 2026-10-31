@@ -1,6 +1,6 @@
 # Seven Days Beyond
 
-# <span style="color:red">**This project is no longer maintained.**</span>
+<span style="color:red">**This project is no longer maintained.**</span>
 
 Seven Days Beyond is an experimental 7 Days to Die mod project for exploring a connected grid of pregenerated maps. The initial target is an 8 × 8 grid (64 maps) and up to six simultaneous players, with automatic travel to the adjacent map when a player reaches a boundary.
 
